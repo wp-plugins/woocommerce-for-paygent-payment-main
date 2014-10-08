@@ -21,7 +21,7 @@ include_once(WC_PAYGENT_PLUGIN_PATH."/jp/co/ks/merchanttool/connectmodule/except
 	/**
 	 * プロパティファイル名
 	 */
-	define("PaygentB2BModuleResources__PROPERTIES_FILE_NAME", WC_PAYGENT_PLUGIN_PATH."/modenv_properties.php");
+//	define("PaygentB2BModuleResources__PROPERTIES_FILE_NAME", WC_PAYGENT_PLUGIN_PATH."/modenv_properties.php");
 
 	/**
 	 * 照会系電文種別の区切り文字
@@ -56,7 +56,7 @@ include_once(WC_PAYGENT_PLUGIN_PATH."/jp/co/ks/merchanttool/connectmodule/except
 	/**
 	 * Proxyポート番号
 	 */
-	define("PaygentB2BModuleResources__PROXY_SERVER_PORT", "paygentB2Bmodule.proxy_server_port");
+	define("PaygentB2BModuleResources__PROXY_SERVER_PORT", "0");
 
 	/**
 	 * デフォルトID
@@ -335,31 +335,16 @@ include_once(WC_PAYGENT_PLUGIN_PATH."/jp/co/ks/merchanttool/connectmodule/except
 
 		// Properties File Read
 		$prop = null;
-
-		$prop = PaygentB2BModuleResources::parseJavaProperty(PaygentB2BModuleResources__PROPERTIES_FILE_NAME);
-		$prop[PaygentB2BModuleResources__CLIENT_FILE_PATH]=CLIENT_FILE_PATH;// add 20140721 by Shohei Tanaka
-		$prop[PaygentB2BModuleResources__CA_FILE_PATH]=CA_FILE_PATH;// add 20140721 by Shohei Tanaka
-
-		if ($prop === false) {
-			// Properties File 読込エラー
-			trigger_error(PaygentB2BModuleException__RESOURCE_FILE_NOT_FOUND_ERROR
-				. ": Properties file doesn't exist.", E_USER_WARNING);
-			return PaygentB2BModuleException__RESOURCE_FILE_NOT_FOUND_ERROR; 
-		}
-
-		// 必須項目エラーチェック
-		if (!($this->isPropertiesIndispensableItem($prop) 
-			&& $this->isPropertiesSetData($prop) 
-			&& $this->isPropertieSetInt($prop))
-			|| $this->isURLNull($prop)) {
-			// 必須項目エラー
-			$propConnect = null;
-			trigger_error(PaygentB2BModuleException__RESOURCE_FILE_REQUIRED_ERROR
-				. ": Properties file contains inappropriate value.", E_USER_WARNING);
-			return PaygentB2BModuleException__RESOURCE_FILE_REQUIRED_ERROR; 
-		}
-//		$this->propConnect = $prop;
-		$this->propConnect = array(
+		
+//		$prop = PaygentB2BModuleResources::parseJavaProperty(PaygentB2BModuleResources__PROPERTIES_FILE_NAME);
+		$prop = array(
+			PaygentB2BModuleResources__LOG_OUTPUT_PATH => WP_CONTENT_DIR.'/uploads/wc-paygent/connectmodule.log',
+			PaygentB2BModuleResources__CLIENT_FILE_PATH =>CLIENT_FILE_PATH,
+			PaygentB2BModuleResources__CA_FILE_PATH => CA_FILE_PATH,
+			PaygentB2BModuleResources__DEBUG_FLG => PAYGENT_DEBUG_FLG,
+			PaygentB2BModuleResources__TIMEOUT_VALUE => PAYGENT_TIMEOUT_VALUE,
+			PaygentB2BModuleResources__TELEGRAM_KIND_REFS =>PAYGENT_TELEGRAM_KIND_REF,
+			PaygentB2BModuleResources__SELECT_MAX_CNT =>PAYGENT_SELCET_MAX_CNT,
 			'paygentB2Bmodule.url.01'=>URL01,
 			'paygentB2Bmodule.url.02'=>URL02,
 			'paygentB2Bmodule.url.11'=>URL11,
@@ -379,7 +364,28 @@ include_once(WC_PAYGENT_PLUGIN_PATH."/jp/co/ks/merchanttool/connectmodule/except
 			'paygentB2Bmodule.url.20'=>URL20,
 			'paygentB2Bmodule.url.15'=>URL15,
 			'paygentB2Bmodule.url.13'=>URL13,
-		);
+		);// add 20141009 by Shohei Tanaka
+
+
+		if ($prop === false) {
+			// Properties File 読込エラー
+			trigger_error(PaygentB2BModuleException__RESOURCE_FILE_NOT_FOUND_ERROR
+				. ": Properties file doesn't exist.", E_USER_WARNING);
+			return PaygentB2BModuleException__RESOURCE_FILE_NOT_FOUND_ERROR; 
+		}
+
+		// 必須項目エラーチェック
+		if (!($this->isPropertiesIndispensableItem($prop) 
+			&& $this->isPropertiesSetData($prop) 
+			&& $this->isPropertieSetInt($prop))
+			|| $this->isURLNull($prop)) {
+			// 必須項目エラー
+			$propConnect = null;
+			trigger_error(PaygentB2BModuleException__RESOURCE_FILE_REQUIRED_ERROR
+				. ": Properties file contains inappropriate value.", E_USER_WARNING);
+			return PaygentB2BModuleException__RESOURCE_FILE_REQUIRED_ERROR; 
+		}
+		$this->propConnect = $prop;
 		
 		// クライアント証明書ファイルパス
 		if (array_key_exists(PaygentB2BModuleResources__CLIENT_FILE_PATH, $prop)
@@ -431,38 +437,38 @@ include_once(WC_PAYGENT_PLUGIN_PATH."/jp/co/ks/merchanttool/connectmodule/except
 		}
 
 		// タイムアウト値
-//		if (array_key_exists(PaygentB2BModuleResources__TIMEOUT_VALUE, $prop)
-//				&& !(StringUtil::isEmpty($prop[PaygentB2BModuleResources__TIMEOUT_VALUE]))) {
-			$this->timeout = PAYGENT_TIMEOUT_VALUE;//Changed 20140728 Shohei Tanaka
-//		}
+		if (array_key_exists(PaygentB2BModuleResources__TIMEOUT_VALUE, $prop)
+				&& !(StringUtil::isEmpty($prop[PaygentB2BModuleResources__TIMEOUT_VALUE]))) {
+			$this->timeout = $prop[PaygentB2BModuleResources__TIMEOUT_VALUE];
+		}
 
 		// ログ出力先
-//		if (array_key_exists(PaygentB2BModuleResources__LOG_OUTPUT_PATH, $prop)
-//				&& !(StringUtil::isEmpty($prop[PaygentB2BModuleResources__LOG_OUTPUT_PATH]))) {
-			$this->logOutputPath = WP_CONTENT_DIR.'/uploads/wc-paygent/connectmodule.log';//Changed 20140728 Shohei Tanaka
-//		}
+		if (array_key_exists(PaygentB2BModuleResources__LOG_OUTPUT_PATH, $prop)
+				&& !(StringUtil::isEmpty($prop[PaygentB2BModuleResources__LOG_OUTPUT_PATH]))) {
+			$this->logOutputPath = $prop[PaygentB2BModuleResources__LOG_OUTPUT_PATH];
+		}
 
 		// 照会MAX件数
-//		if (array_key_exists(PaygentB2BModuleResources__SELECT_MAX_CNT, $prop)
-//				&& !(StringUtil::isEmpty($prop[PaygentB2BModuleResources__SELECT_MAX_CNT]))) {
-			$this->selectMaxCnt = PAYGENT_SELCET_MAX_CNT;//Changed 20140728 Shohei Tanaka
-//		}
+		if (array_key_exists(PaygentB2BModuleResources__SELECT_MAX_CNT, $prop)
+				&& !(StringUtil::isEmpty($prop[PaygentB2BModuleResources__SELECT_MAX_CNT]))) {
+			$this->selectMaxCnt =$prop[PaygentB2BModuleResources__SELECT_MAX_CNT];
+		}
 
 		// 照会電文種別リスト
-//		if (array_key_exists(PaygentB2BModuleResources__TELEGRAM_KIND_REFS, $prop)
-//				&& !(StringUtil::isEmpty($prop[PaygentB2BModuleResources__TELEGRAM_KIND_REFS]))) {
-			$telegramKindRef = PAYGENT_TELEGRAM_KIND_REF;//Changed 20140728 Shohei Tanaka
+		if (array_key_exists(PaygentB2BModuleResources__TELEGRAM_KIND_REFS, $prop)
+				&& !(StringUtil::isEmpty($prop[PaygentB2BModuleResources__TELEGRAM_KIND_REFS]))) {
+			$telegramKindRef = $prop[PaygentB2BModuleResources__TELEGRAM_KIND_REFS];
 			$this->telegramKindRefs = $this->split($telegramKindRef, PaygentB2BModuleResources__TELEGRAM_KIND_SEPARATOR);
-//		}
-//		if ($this->telegramKindRefs == null) {
-//			$this->telegramKindRefs = array();
-//		}
+		}
+		if ($this->telegramKindRefs == null) {
+			$this->telegramKindRefs = array();
+		}
 				
 		// デバッグオプション
-//		if (array_key_exists(PaygentB2BModuleResources__DEBUG_FLG, $prop)
-//			&& !(StringUtil::isEmpty($prop[PaygentB2BModuleResources__DEBUG_FLG]))) {
-			$this->debugFlg = PAYGENT_DEBUG_FALG;//Changed 20140728 Shohei Tanaka
-//		}
+		if (array_key_exists(PaygentB2BModuleResources__DEBUG_FLG, $prop)
+			&& !(StringUtil::isEmpty($prop[PaygentB2BModuleResources__DEBUG_FLG]))) {
+			$this->debugFlg = PAYGENT_DEBUG_FLG;
+		}
 		
 		return true;
 	}
@@ -478,9 +484,9 @@ include_once(WC_PAYGENT_PLUGIN_PATH."/jp/co/ks/merchanttool/connectmodule/except
 
 		if ((array_key_exists(PaygentB2BModuleResources__CLIENT_FILE_PATH, $prop)
 				&& array_key_exists(PaygentB2BModuleResources__CA_FILE_PATH, $prop)
-				//&& array_key_exists(PaygentB2BModuleResources__TIMEOUT_VALUE, $prop)//Changed 20140728 Shohei Tanaka
-				//&& array_key_exists(PaygentB2BModuleResources__LOG_OUTPUT_PATH, $prop)//Changed 20140728 Shohei Tanaka
-				//&& array_key_exists(PaygentB2BModuleResources__SELECT_MAX_CNT, $prop)//Changed 20140728 Shohei Tanaka
+				&& array_key_exists(PaygentB2BModuleResources__TIMEOUT_VALUE, $prop)
+				&& array_key_exists(PaygentB2BModuleResources__LOG_OUTPUT_PATH, $prop)
+				&& array_key_exists(PaygentB2BModuleResources__SELECT_MAX_CNT, $prop)
 				)) {
 			// 必須項目有り
 			$rb = true;
@@ -500,7 +506,7 @@ include_once(WC_PAYGENT_PLUGIN_PATH."/jp/co/ks/merchanttool/connectmodule/except
 
 		if (StringUtil::isEmpty($prop[PaygentB2BModuleResources__CLIENT_FILE_PATH])
 				|| StringUtil::isEmpty($prop[PaygentB2BModuleResources__CA_FILE_PATH])
-//				|| StringUtil::isEmpty($prop[PaygentB2BModuleResources__TIMEOUT_VALUE])
+				|| StringUtil::isEmpty($prop[PaygentB2BModuleResources__TIMEOUT_VALUE])
 				|| StringUtil::isEmpty($prop[PaygentB2BModuleResources__SELECT_MAX_CNT])) {
 			// 必須項目未設定エラー
 			$rb = false;
@@ -518,8 +524,8 @@ include_once(WC_PAYGENT_PLUGIN_PATH."/jp/co/ks/merchanttool/connectmodule/except
 	function isPropertieSetInt($prop) {
 		$rb = false;
 
-		if (StringUtil::isNumeric(PAYGENT_TIMEOUT_VALUE)
-				&& StringUtil::isNumeric(PAYGENT_SELECT_MAX_CNT)) {
+		if (StringUtil::isNumeric($prop[PaygentB2BModuleResources__TIMEOUT_VALUE])
+				&& StringUtil::isNumeric($prop[PaygentB2BModuleResources__SELECT_MAX_CNT])) {
 			// 数値設定
 			$rb = true;
 		}

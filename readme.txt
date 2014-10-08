@@ -1,10 +1,10 @@
 === WooCommerce for Paygent Payment Main===
 Contributors: shohei.tanaka
-Donate link: http://wordpress.tanakashohei.com/
+Donate link: http://wc.artws.info/
 Tags: credit cards, woocommerce, ecommerce, e-commerce, payment, payment Gateway, japan, payment
 Requires at least: 3.8
-Tested up to: 3.9
-Stable tag: 0.9.0
+Tested up to: 4.0
+Stable tag: 1.0.0
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -15,7 +15,6 @@ Paygent Credit Card and Convenience store Payment Gateway plugin provides all po
 = In Japanese: =
 
 このプラグインはWooCommerceでペイジャント決済（クレジット決済とコンビニ決済）を使う為に必要なプラグインです。
-3Dセキュアにはまだ対応しておりません。2014年8月に対応予定です。
 
 このプラグインはWooCommerceの日本語レビュアーによって作成されています。
 
@@ -77,6 +76,8 @@ A: Is preparing.
 2. Credit Input Form
 
 == Changelog ==
+= 1.0.0 =
+Major Version Update
 = 0.9.0 =
 make beta version
 

@@ -1,9 +1,9 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: WooCommerce For Paygent Main 2 method v0.9.0\n"
+"Project-Id-Version: WooCommerce For Paygent Main 2 method v1.0.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2014-07-22 16:33+0900\n"
+"PO-Revision-Date: 2014-10-09 05:46+0900\n"
 "Last-Translator: Shohei Tanaka <shohei.tanaka@artisanworkshop.biz>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -20,747 +20,671 @@ msgstr ""
 "X-Poedit-SearchPath-0: .\n"
 
 # @ woocommerce-paygent-main2
-#: includes/gateways/paygent/class-wc-gateway-paygent-cc.php:29
-msgid "Proceed to Paygent Credit Card"
-msgstr "クレジット決済を進める"
+#. translators: plugin header field 'Name'
+#: includes/class-wc-admin-screen-paygent.php:0 woocommerce-paygent-main.php:0
+msgid "WooCommerce For Paygent Main 2 method"
+msgstr "WooCommerce For Paygent"
 
 # @ woocommerce-paygent-main2
-#: includes/gateways/paygent/class-wc-gateway-paygent-cc.php:30
-#: includes/gateways/paygent/class-wc-gateway-paygent-cc.php:161
-msgid "Paygent Credit Card"
-msgstr "ペイジェントクレジット決済"
+#. translators: plugin header field 'PluginURI'
+#: includes/class-wc-admin-screen-paygent.php:0 woocommerce-paygent-main.php:0
+msgid "http://wordpress.org/plugins/woocommerce-paygent-main2/"
+msgstr "http://wordpress.org/plugins/woocommerce-paygent-main2/"
 
 # @ woocommerce-paygent-main2
-#: includes/gateways/paygent/class-wc-gateway-paygent-cc.php:35
-msgid "Paygent Credit Card Payment Gateway"
-msgstr "クレジット決済（ペイジャント）"
-
-# @ woocommerce-paygent-main2
-#: includes/gateways/paygent/class-wc-gateway-paygent-cc.php:36
-msgid "Allows payments by Paygent Credit Card in Japan."
+#. translators: plugin header field 'Description'
+#: includes/class-wc-admin-screen-paygent.php:0 woocommerce-paygent-main.php:0
+msgid "Woocommerce Main 2 gateway payment"
 msgstr ""
+"WooCommerce向けペイジェント決済のクレジットカードとコンビ二決済用プラグイン"
 
 # @ woocommerce-paygent-main2
-#: includes/gateways/paygent/class-wc-gateway-paygent-cc.php:61
+#. translators: plugin header field 'Author'
+#: includes/class-wc-admin-screen-paygent.php:0 woocommerce-paygent-main.php:0
+msgid "Artisan Workshop"
+msgstr "職人工房"
+
+# @ woocommerce-paygent-main2
+#. translators: plugin header field 'AuthorURI'
+#: includes/class-wc-admin-screen-paygent.php:0 woocommerce-paygent-main.php:0
+msgid "http://wc.artws.info/"
+msgstr "http://wc.artws.info/"
+
+# @ woocommerce-paygent-main2
+#. translators: plugin header field 'Version'
+#: includes/class-wc-admin-screen-paygent.php:0 woocommerce-paygent-main.php:0
+msgid "1.0.0"
+msgstr "1.0.0"
+
+# @ woocommerce-paygent-main2
+#: includes/class-wc-admin-screen-paygent.php:38
+msgid "Paygent Setting"
+msgstr "ペイジェント設定"
+
+# @ woocommerce-paygent-main2
+#: includes/class-wc-admin-screen-paygent.php:69
+msgid "Client Cert File do not exist. "
+msgstr ""
+"クライアント証明書（Client Certファイル）がアップロードされていません。"
+
+# @ woocommerce-paygent-main2
+#: includes/class-wc-admin-screen-paygent.php:70
+msgid "CA Cert File do not exist. "
+msgstr "認証済みのCAファイル（CA Certファイル）がアップロードされていません。"
+
+# @ woocommerce-paygent-main2
+#: includes/class-wc-admin-screen-paygent.php:71
+msgid "Paygent Cert File do not exist. Please put Cert files."
+msgstr "ペイジェント"
+
+# @ woocommerce-paygent-main2
+#: includes/class-wc-admin-screen-paygent.php:80
 #, php-format
 msgid ""
 "Paygent Commerce is enabled and the <a href=\"%s\">force SSL option</a> is "
 "disabled; your checkout is not secure! Please enable SSL and ensure your "
 "server has a valid SSL certificate."
 msgstr ""
+"ペイジェント決済を利用するには、セキュリティーの為に<a href=\"%s\">SSL設定</"
+"a>が必要です。サーバーにSSL認証設定を施しSSLを有効にしてください。"
 
 # @ woocommerce-paygent-main2
-#: includes/gateways/paygent/class-wc-gateway-paygent-cc.php:65
-msgid " Cilent Cert File do not exist. "
-msgstr "Cilent Certファイルが見つかりません。"
+#: includes/gateways/paygent/class-wc-gateway-paygent-cc.php:29
+msgid "Proceed to Paygent Credit Card"
+msgstr "クレジットカード"
 
 # @ woocommerce-paygent-main2
-#: includes/gateways/paygent/class-wc-gateway-paygent-cc.php:66
-msgid " CA Cert File do not exist. "
-msgstr "CA Certファイルが見つかりません。"
+#: includes/gateways/paygent/class-wc-gateway-paygent-cc.php:30
+#: includes/gateways/paygent/class-wc-gateway-paygent-cc.php:128
+msgid "Paygent Credit Card"
+msgstr "クレジットカード（ペイジェント）"
 
 # @ woocommerce-paygent-main2
-#: includes/gateways/paygent/class-wc-gateway-paygent-cc.php:67
-msgid "Paygent Cert File do not exist. Please put Cert files."
-msgstr ""
+#: includes/gateways/paygent/class-wc-gateway-paygent-cc.php:41
+msgid "Paygent Credit Card Payment Gateway"
+msgstr "クレジットカード決済（ペイジェント）"
 
 # @ woocommerce-paygent-main2
-#: includes/gateways/paygent/class-wc-gateway-paygent-cc.php:78
-#: includes/gateways/paygent/class-wc-gateway-paygent-cs.php:126
+#: includes/gateways/paygent/class-wc-gateway-paygent-cc.php:42
+msgid "Allows payments by Paygent Credit Card in Japan."
+msgstr "クレジットカード決済（ペイジェント）を利用する"
+
+# @ woocommerce-paygent-main2
+#: includes/gateways/paygent/class-wc-gateway-paygent-cc.php:69
+#: includes/gateways/paygent/class-wc-gateway-paygent-cs.php:68
+#: includes/gateways/paygent/class-wc-gateway-paygent-mccc.php:69
 msgid "Enable/Disable"
 msgstr "有効化/無効化"
 
 # @ woocommerce-paygent-main2
-#: includes/gateways/paygent/class-wc-gateway-paygent-cc.php:79
+#: includes/gateways/paygent/class-wc-gateway-paygent-cc.php:70
 msgid "Enable paygent Credit Card Payment"
-msgstr "クレジットカード（ペイジェント）決済を有効にする"
+msgstr "クレジットカード決済（ペイジェント）を有効にする"
 
 # @ woocommerce-paygent-main2
-#: includes/gateways/paygent/class-wc-gateway-paygent-cc.php:85
-#: includes/gateways/paygent/class-wc-gateway-paygent-cs.php:132
+#: includes/gateways/paygent/class-wc-gateway-paygent-cc.php:76
+#: includes/gateways/paygent/class-wc-gateway-paygent-cs.php:75
+#: includes/gateways/paygent/class-wc-gateway-paygent-mccc.php:76
 msgid "Title"
 msgstr "タイトル"
 
 # @ woocommerce-paygent-main2
-#: includes/gateways/paygent/class-wc-gateway-paygent-cc.php:87
-#: includes/gateways/paygent/class-wc-gateway-paygent-cs.php:134
+#: includes/gateways/paygent/class-wc-gateway-paygent-cc.php:78
+#: includes/gateways/paygent/class-wc-gateway-paygent-cs.php:77
+#: includes/gateways/paygent/class-wc-gateway-paygent-mccc.php:78
 msgid "This controls the title which the user sees during checkout."
-msgstr "ユーザーが決済中に見るタイトルを管理します。"
+msgstr "ここで、ユーザーがチェックアウト時に見るタイトルを設定します。"
 
 # @ woocommerce-paygent-main2
-#: includes/gateways/paygent/class-wc-gateway-paygent-cc.php:88
+#: includes/gateways/paygent/class-wc-gateway-paygent-cc.php:79
 msgid "Credit Card (Paygent)"
-msgstr "クレジットカード（ペイジェント）"
+msgstr "クレジットカード決済（ペイジェント）"
 
 # @ woocommerce-paygent-main2
-#: includes/gateways/paygent/class-wc-gateway-paygent-cc.php:91
-#: includes/gateways/paygent/class-wc-gateway-paygent-cs.php:139
+#: includes/gateways/paygent/class-wc-gateway-paygent-cc.php:82
+#: includes/gateways/paygent/class-wc-gateway-paygent-cs.php:81
+#: includes/gateways/paygent/class-wc-gateway-paygent-mccc.php:82
 msgid "Description"
 msgstr "説明"
 
 # @ woocommerce-paygent-main2
-#: includes/gateways/paygent/class-wc-gateway-paygent-cc.php:93
-#: includes/gateways/paygent/class-wc-gateway-paygent-cs.php:141
+#: includes/gateways/paygent/class-wc-gateway-paygent-cc.php:84
+#: includes/gateways/paygent/class-wc-gateway-paygent-cs.php:83
+#: includes/gateways/paygent/class-wc-gateway-paygent-mccc.php:84
 msgid "This controls the description which the user sees during checkout."
-msgstr "ユーザーが決済中に見る説明を管理します。"
+msgstr "ここで、ユーザーがチェックアウト時に見る説明を設定します。"
 
 # @ woocommerce-paygent-main2
-#: includes/gateways/paygent/class-wc-gateway-paygent-cc.php:94
+#: includes/gateways/paygent/class-wc-gateway-paygent-cc.php:85
+#: includes/gateways/paygent/class-wc-gateway-paygent-mccc.php:85
 msgid "Pay with your credit card via Paygent."
-msgstr ""
+msgstr "ペイジェント経由でクレジット決済を利用します。"
+
+# @ woocommerce-paygent-main2
+#: includes/gateways/paygent/class-wc-gateway-paygent-cc.php:88
+#: includes/gateways/paygent/class-wc-gateway-paygent-mccc.php:88
+msgid "Security Check Code"
+msgstr "セキュリティーチェックコード"
+
+# @ woocommerce-paygent-main2
+#: includes/gateways/paygent/class-wc-gateway-paygent-cc.php:90
+#: includes/gateways/paygent/class-wc-gateway-paygent-mccc.php:90
+msgid "Enable Security Check Code"
+msgstr "セキュリティーチェックコードを利用"
+
+# @ woocommerce-paygent-main2
+#: includes/gateways/paygent/class-wc-gateway-paygent-cc.php:92
+#: includes/gateways/paygent/class-wc-gateway-paygent-mccc.php:92
+msgid "Require customer to enter credit card CVV code (Security Check Code)."
+msgstr "お客様にCVV（セキュリティーチェックコード）の入力を要求します。"
+
+# @ woocommerce-paygent-main2
+#: includes/gateways/paygent/class-wc-gateway-paygent-cc.php:95
+#: includes/gateways/paygent/class-wc-gateway-paygent-mccc.php:95
+msgid "Store Card Infomation"
+msgstr "カード情報お預かり機能"
 
 # @ woocommerce-paygent-main2
 #: includes/gateways/paygent/class-wc-gateway-paygent-cc.php:97
-msgid "Merchant ID"
-msgstr "マーチャントID"
+#: includes/gateways/paygent/class-wc-gateway-paygent-mccc.php:97
+msgid "Enable Store Card Infomation"
+msgstr "カード情報お預かり機能を利用"
 
 # @ woocommerce-paygent-main2
 #: includes/gateways/paygent/class-wc-gateway-paygent-cc.php:99
-#: includes/gateways/paygent/class-wc-gateway-paygent-cc.php:105
-#: includes/gateways/paygent/class-wc-gateway-paygent-cc.php:111
-msgid "This is the Merchant Code generated within the paygent payment gateway."
+#: includes/gateways/paygent/class-wc-gateway-paygent-mccc.php:99
+msgid "Store user Credit Card information in Paygent Server.(Option)"
 msgstr ""
+"カード情報お預かり機能を利用する（有料オプション）※ペイジェントと契約が必要で"
+"す。"
 
 # @ woocommerce-paygent-main2
-#: includes/gateways/paygent/class-wc-gateway-paygent-cc.php:103
-msgid "Connect ID"
-msgstr "コネクトID"
+#: includes/gateways/paygent/class-wc-gateway-paygent-cc.php:102
+#: includes/gateways/paygent/class-wc-gateway-paygent-cs.php:87
+#: includes/gateways/paygent/class-wc-gateway-paygent-mccc.php:102
+msgid "Gateway Testing"
+msgstr "決済テスト"
+
+# @ woocommerce-paygent-main2
+#: includes/gateways/paygent/class-wc-gateway-paygent-cc.php:107
+#: includes/gateways/paygent/class-wc-gateway-paygent-cs.php:92
+#: includes/gateways/paygent/class-wc-gateway-paygent-mccc.php:107
+msgid "paygent Test mode"
+msgstr "ペイジェント試験環境モード"
 
 # @ woocommerce-paygent-main2
 #: includes/gateways/paygent/class-wc-gateway-paygent-cc.php:109
-msgid "Connect Password"
-msgstr "コネクトパスワード"
-
-# @ woocommerce-paygent-main2
-#: includes/gateways/paygent/class-wc-gateway-paygent-cc.php:115
-msgid "Security Check Code"
-msgstr ""
-
-# @ woocommerce-paygent-main2
-#: includes/gateways/paygent/class-wc-gateway-paygent-cc.php:117
-msgid "Enable Security Check Code"
-msgstr "セキュリティーコードと使う"
-
-# @ woocommerce-paygent-main2
-#: includes/gateways/paygent/class-wc-gateway-paygent-cc.php:119
-msgid "Require customer to enter credit card CVV code (Security Check Code)."
-msgstr ""
-
-# @ woocommerce-paygent-main2
-#: includes/gateways/paygent/class-wc-gateway-paygent-cc.php:122
-msgid "Store Card Infomation"
-msgstr ""
-
-# @ woocommerce-paygent-main2
-#: includes/gateways/paygent/class-wc-gateway-paygent-cc.php:124
-msgid "Enable Store Card Infomation"
-msgstr ""
-
-# @ woocommerce-paygent-main2
-#: includes/gateways/paygent/class-wc-gateway-paygent-cc.php:126
-msgid "Store user Credit Card information in Paygent Server.(Option)"
-msgstr ""
-
-# @ woocommerce-paygent-main2
-#: includes/gateways/paygent/class-wc-gateway-paygent-cc.php:129
-msgid "Site ID"
-msgstr ""
-
-# @ woocommerce-paygent-main2
-#: includes/gateways/paygent/class-wc-gateway-paygent-cc.php:132
-msgid ""
-"This is the Site ID generated within the paygent payment gateway. If you "
-"have some EC site."
-msgstr ""
-
-# @ woocommerce-paygent-main2
-#: includes/gateways/paygent/class-wc-gateway-paygent-cc.php:135
-#: includes/gateways/paygent/class-wc-gateway-paygent-cs.php:221
-msgid "Gateway Testing"
-msgstr ""
-
-# @ woocommerce-paygent-main2
-#: includes/gateways/paygent/class-wc-gateway-paygent-cc.php:140
-msgid "paygent Test mode"
-msgstr ""
-
-# @ woocommerce-paygent-main2
-#: includes/gateways/paygent/class-wc-gateway-paygent-cc.php:142
+#: includes/gateways/paygent/class-wc-gateway-paygent-cs.php:94
+#: includes/gateways/paygent/class-wc-gateway-paygent-mccc.php:109
 msgid "Enable paygent Test mode"
-msgstr ""
+msgstr "ペイジェントのテスト環境で利用"
 
 # @ woocommerce-paygent-main2
-#: includes/gateways/paygent/class-wc-gateway-paygent-cc.php:144
+#: includes/gateways/paygent/class-wc-gateway-paygent-cc.php:111
+#: includes/gateways/paygent/class-wc-gateway-paygent-cs.php:96
 msgid "Please check you want to use paygent Test mode."
-msgstr ""
+msgstr "チェックをするとペイジェントのテスト環境で利用します。"
 
 # @ woocommerce-paygent-main2
-#: includes/gateways/paygent/class-wc-gateway-paygent-cc.php:147
-#: includes/gateways/paygent/class-wc-gateway-paygent-cs.php:233
+#: includes/gateways/paygent/class-wc-gateway-paygent-cc.php:114
+#: includes/gateways/paygent/class-wc-gateway-paygent-cs.php:99
+#: includes/gateways/paygent/class-wc-gateway-paygent-mccc.php:114
 msgid "Debug Log"
-msgstr ""
+msgstr "デバッグログ"
 
 # @ woocommerce-paygent-main2
-#: includes/gateways/paygent/class-wc-gateway-paygent-cc.php:149
-#: includes/gateways/paygent/class-wc-gateway-paygent-cs.php:235
+#: includes/gateways/paygent/class-wc-gateway-paygent-cc.php:116
+#: includes/gateways/paygent/class-wc-gateway-paygent-cs.php:101
+#: includes/gateways/paygent/class-wc-gateway-paygent-mccc.php:116
 msgid "Enable logging"
-msgstr ""
+msgstr "ログを利用する"
 
 # @ woocommerce-paygent-main2
-#: includes/gateways/paygent/class-wc-gateway-paygent-cc.php:151
+#: includes/gateways/paygent/class-wc-gateway-paygent-cc.php:118
+#: includes/gateways/paygent/class-wc-gateway-paygent-cs.php:103
+#: includes/gateways/paygent/class-wc-gateway-paygent-mccc.php:118
 #, php-format
 msgid ""
 "Log Paygent events, such as IPN requests, inside <code>woocommerce/logs/"
 "paygent-%s.txt</code>"
 msgstr ""
+"ペイジェントのログを取ります<code>woocommerce/logs/paygent-%s.txt</code>"
 
 # @ woocommerce-paygent-main2
-#: includes/gateways/paygent/class-wc-gateway-paygent-cc.php:162
+#: includes/gateways/paygent/class-wc-gateway-paygent-cc.php:129
 msgid ""
 "The Paygent Credit Card Payment Gateway is simple and powerful.  The plugin "
 "works by adding credit card fields on the checkout page, and then sending "
 "the details to paygent Payment for verification.  <a href=\"http://www.wp-"
 "pay.com/payment-agency/paygent/\">Click here to read Paygent order</a>."
 msgstr ""
+"ペイジェントのクレジット決済機能はシンプルで使いやすいです。このプラグインは"
+"決済ページにクレジット決済機能を追加し、決済情報をペイジェントに送信します。"
+"利用にはペイジェントと契約が必要です。<a href=\"http://www.paygent.co.jp/"
+"payment_service/package_cart/wordpress/\">申し込みはこちらから</a>"
 
 # @ woocommerce-paygent-main2
-#: includes/gateways/paygent/class-wc-gateway-paygent-cc.php:181
+#: includes/gateways/paygent/class-wc-gateway-paygent-cc.php:148
+#: includes/gateways/paygent/class-wc-gateway-paygent-mccc.php:148
 msgid "Use a stored credit card from Paygent"
-msgstr ""
+msgstr "クレジットカード情報を保存する"
 
 # @ woocommerce-paygent-main2
-#: includes/gateways/paygent/class-wc-gateway-paygent-cc.php:186
+#: includes/gateways/paygent/class-wc-gateway-paygent-cc.php:153
+#: includes/gateways/paygent/class-wc-gateway-paygent-mccc.php:153
 msgid "credit card last 4 numbers: "
-msgstr ""
+msgstr "クレジットカードの最後の4桁"
 
 # @ woocommerce-paygent-main2
-#: includes/gateways/paygent/class-wc-gateway-paygent-cc.php:193
+#: includes/gateways/paygent/class-wc-gateway-paygent-cc.php:160
+#: includes/gateways/paygent/class-wc-gateway-paygent-mccc.php:160
 msgid "Use a new payment method"
-msgstr ""
+msgstr "新しいクレジットカードを利用する"
 
 # @ woocommerce-paygent-main2
-#: includes/gateways/paygent/class-wc-gateway-paygent-cc.php:199
+#: includes/gateways/paygent/class-wc-gateway-paygent-cc.php:166
+#: includes/gateways/paygent/class-wc-gateway-paygent-mccc.php:166
 msgid "Error! "
-msgstr ""
+msgstr "エラー！"
 
 # @ woocommerce-paygent-main2
-#: includes/gateways/paygent/class-wc-gateway-paygent-cc.php:209
+#: includes/gateways/paygent/class-wc-gateway-paygent-cc.php:176
+#: includes/gateways/paygent/class-wc-gateway-paygent-mccc.php:176
 msgid "Credit Card number"
-msgstr ""
+msgstr "クレジットカード番号"
 
 # @ woocommerce-paygent-main2
-#: includes/gateways/paygent/class-wc-gateway-paygent-cc.php:216
+#: includes/gateways/paygent/class-wc-gateway-paygent-cc.php:183
+#: includes/gateways/paygent/class-wc-gateway-paygent-mccc.php:183
 msgid "Expiration date"
-msgstr ""
+msgstr "有効期限"
+
+# @ woocommerce-paygent-main2
+#: includes/gateways/paygent/class-wc-gateway-paygent-cc.php:185
+#: includes/gateways/paygent/class-wc-gateway-paygent-mccc.php:185
+msgid "Month"
+msgstr "月"
+
+# @ woocommerce-paygent-main2
+#: includes/gateways/paygent/class-wc-gateway-paygent-cc.php:196
+#: includes/gateways/paygent/class-wc-gateway-paygent-mccc.php:196
+msgid "Year"
+msgstr "年"
+
+# @ woocommerce-paygent-main2
+#: includes/gateways/paygent/class-wc-gateway-paygent-cc.php:208
+#: includes/gateways/paygent/class-wc-gateway-paygent-mccc.php:208
+msgid "Card security code"
+msgstr "カードセキュリティーコード"
+
+# @ woocommerce-paygent-main2
+#: includes/gateways/paygent/class-wc-gateway-paygent-cc.php:210
+#: includes/gateways/paygent/class-wc-gateway-paygent-mccc.php:210
+msgid "3 or 4 digits usually found on the signature strip."
+msgstr "裏面の署名欄に記載されている3か4桁の数字を入力下さい。"
 
 # @ woocommerce-paygent-main2
 #: includes/gateways/paygent/class-wc-gateway-paygent-cc.php:218
-msgid "Month"
-msgstr ""
-
-# @ woocommerce-paygent-main2
-#: includes/gateways/paygent/class-wc-gateway-paygent-cc.php:229
-msgid "Year"
-msgstr ""
-
-# @ woocommerce-paygent-main2
-#: includes/gateways/paygent/class-wc-gateway-paygent-cc.php:241
-msgid "Card security code"
-msgstr ""
-
-# @ woocommerce-paygent-main2
-#: includes/gateways/paygent/class-wc-gateway-paygent-cc.php:243
-msgid "3 or 4 digits usually found on the signature strip."
-msgstr ""
-
-# @ woocommerce-paygent-main2
-#: includes/gateways/paygent/class-wc-gateway-paygent-cc.php:251
+#: includes/gateways/paygent/class-wc-gateway-paygent-mccc.php:218
 msgid "Save this billing method?"
-msgstr ""
+msgstr "この請求書情報を保存しますか？"
 
 # @ woocommerce-paygent-main2
-#: includes/gateways/paygent/class-wc-gateway-paygent-cc.php:253
+#: includes/gateways/paygent/class-wc-gateway-paygent-cc.php:220
+#: includes/gateways/paygent/class-wc-gateway-paygent-mccc.php:220
 msgid "Select to store your billing information for future use."
-msgstr ""
+msgstr "あなたの請求情報を次回も使えるようにしますか。"
 
 # @ woocommerce-paygent-main2
-#: includes/gateways/paygent/class-wc-gateway-paygent-cc.php:329
+#: includes/gateways/paygent/class-wc-gateway-paygent-cc.php:296
+#: includes/gateways/paygent/class-wc-gateway-paygent-cs.php:181
+#: includes/gateways/paygent/class-wc-gateway-paygent-mccc.php:296
 msgid "paygent Payment completed. Transaction ID: "
-msgstr ""
+msgstr "クレジット決済が完了しました。Transaction ID: "
 
 # @ woocommerce-paygent-main2
-#: includes/gateways/paygent/class-wc-gateway-paygent-cc.php:342
+#: includes/gateways/paygent/class-wc-gateway-paygent-cc.php:309
+#: includes/gateways/paygent/class-wc-gateway-paygent-cs.php:194
+#: includes/gateways/paygent/class-wc-gateway-paygent-mccc.php:309
 msgid "paygent Payment failed. Sysmte Error: "
-msgstr ""
+msgstr "クレジット決済が失敗しました。Sysmte Error: "
 
 # @ woocommerce-paygent-main2
-#: includes/gateways/paygent/class-wc-gateway-paygent-cc.php:343
+#: includes/gateways/paygent/class-wc-gateway-paygent-cc.php:310
+#: includes/gateways/paygent/class-wc-gateway-paygent-cs.php:195
+#: includes/gateways/paygent/class-wc-gateway-paygent-mccc.php:310
 msgid "Sorry, there was an error: "
-msgstr ""
+msgstr "申し訳ございません。エラーが発生しました。エラー："
 
 # @ woocommerce-paygent-main2
-#: includes/gateways/paygent/class-wc-gateway-paygent-cc.php:346
+#: includes/gateways/paygent/class-wc-gateway-paygent-cc.php:313
+#: includes/gateways/paygent/class-wc-gateway-paygent-cs.php:198
+#: includes/gateways/paygent/class-wc-gateway-paygent-mccc.php:313
 msgid "paygent Payment failed. Some trouble happened."
-msgstr ""
+msgstr "決済が失敗しました。何かトラブルが発生したようです。"
 
 # @ woocommerce-paygent-main2
-#: includes/gateways/paygent/class-wc-gateway-paygent-cc.php:347
+#: includes/gateways/paygent/class-wc-gateway-paygent-cc.php:314
+#: includes/gateways/paygent/class-wc-gateway-paygent-cs.php:199
+#: includes/gateways/paygent/class-wc-gateway-paygent-mccc.php:314
 msgid ""
 "No response from payment gateway server. Try again later or contact the site "
 "administrator."
 msgstr ""
+"ペイジェントのサーバーから反応がありません。少し経ってから再度試すか、サイト"
+"管理者にご連絡下さい。"
 
 # @ woocommerce-paygent-main2
-#: includes/gateways/paygent/class-wc-gateway-paygent-cc.php:382
+#: includes/gateways/paygent/class-wc-gateway-paygent-cc.php:349
+#: includes/gateways/paygent/class-wc-gateway-paygent-mccc.php:349
 msgid ""
 "paygent Payment scheduled subscription payment completed. Transaction ID: "
-msgstr ""
+msgstr "月額課金決済が完了しました。Transaction ID: "
 
 # @ woocommerce-paygent-main2
-#: includes/gateways/paygent/class-wc-gateway-paygent-cc.php:387
+#: includes/gateways/paygent/class-wc-gateway-paygent-cc.php:354
+#: includes/gateways/paygent/class-wc-gateway-paygent-mccc.php:354
 msgid ""
 "paygent Payment scheduled subscription payment failed. Payment declined."
-msgstr ""
+msgstr "月額課金決済が失敗しました。決済は完了しておりません。"
 
 # @ woocommerce-paygent-main2
-#: includes/gateways/paygent/class-wc-gateway-paygent-cc.php:392
+#: includes/gateways/paygent/class-wc-gateway-paygent-cc.php:359
+#: includes/gateways/paygent/class-wc-gateway-paygent-mccc.php:359
 msgid "paygent Payment scheduled subscription payment failed. Error: "
-msgstr ""
+msgstr "月額課金決済が失敗しました。エラー："
 
 # @ woocommerce-paygent-main2
-#: includes/gateways/paygent/class-wc-gateway-paygent-cc.php:397
+#: includes/gateways/paygent/class-wc-gateway-paygent-cc.php:364
+#: includes/gateways/paygent/class-wc-gateway-paygent-mccc.php:364
 msgid ""
 "paygent Payment scheduled subscription payment failed. Couldn't connect to "
 "gateway server."
-msgstr ""
+msgstr "月額課金決済が失敗しました。決済サーバーに繋がりませんでした。"
 
 # @ woocommerce-paygent-main2
-#: includes/gateways/paygent/class-wc-gateway-paygent-cc.php:470
+#: includes/gateways/paygent/class-wc-gateway-paygent-cc.php:437
+#: includes/gateways/paygent/class-wc-gateway-paygent-mccc.php:437
 msgid ""
 "Sorry, you need to create an account in order for us to save your payment "
 "information."
-msgstr ""
+msgstr "支払い情報を保存する為にアカウントを作る必要があります。"
 
 # @ woocommerce-paygent-main2
-#: includes/gateways/paygent/class-wc-gateway-paygent-cc.php:481
+#: includes/gateways/paygent/class-wc-gateway-paygent-cc.php:448
+#: includes/gateways/paygent/class-wc-gateway-paygent-mccc.php:448
 msgid "Card number is invalid."
-msgstr ""
+msgstr "カード番号が無効です。"
 
 # @ woocommerce-paygent-main2
-#: includes/gateways/paygent/class-wc-gateway-paygent-cc.php:488
+#: includes/gateways/paygent/class-wc-gateway-paygent-cc.php:455
+#: includes/gateways/paygent/class-wc-gateway-paygent-mccc.php:455
 msgid "Card security code is invalid (only digits are allowed)."
-msgstr ""
+msgstr "カードセキュリティーコードが無効です。（数字のみ）"
 
 # @ woocommerce-paygent-main2
-#: includes/gateways/paygent/class-wc-gateway-paygent-cc.php:492
+#: includes/gateways/paygent/class-wc-gateway-paygent-cc.php:459
+#: includes/gateways/paygent/class-wc-gateway-paygent-mccc.php:459
 msgid "Card security code is invalid (wrong length)."
-msgstr ""
+msgstr "カードセキュリティーコードが無効です。（桁数が違います）"
 
 # @ woocommerce-paygent-main2
-#: includes/gateways/paygent/class-wc-gateway-paygent-cc.php:506
+#: includes/gateways/paygent/class-wc-gateway-paygent-cc.php:473
+#: includes/gateways/paygent/class-wc-gateway-paygent-mccc.php:473
 msgid "Card expiration date is invalid"
-msgstr ""
+msgstr "有効期限が無効です。"
 
 # @ woocommerce-paygent-main2
-#: includes/gateways/paygent/class-wc-gateway-paygent-cc.php:576
+#: includes/gateways/paygent/class-wc-gateway-paygent-cc.php:543
+#: includes/gateways/paygent/class-wc-gateway-paygent-cs.php:205
+#: includes/gateways/paygent/class-wc-gateway-paygent-mccc.php:543
 msgid "Thank you for your order."
-msgstr ""
+msgstr "ご注文ありがとう御座いました。"
 
 # @ woocommerce-paygent-main2
-#: includes/gateways/paygent/class-wc-gateway-paygent-cs.php:31
-msgid "Proceed to PayPal"
-msgstr ""
+#: includes/gateways/paygent/class-wc-gateway-paygent-cs.php:29
+msgid "Proceed to Paygent Convenience Store"
+msgstr "コンビニ決済に進みます"
 
 # @ woocommerce-paygent-main2
-#: includes/gateways/paygent/class-wc-gateway-paygent-cs.php:34
-#: includes/gateways/paygent/class-wc-gateway-paygent-cs.php:135
-msgid "PayPal"
-msgstr ""
+#: includes/gateways/paygent/class-wc-gateway-paygent-cs.php:30
+msgid "Paygent Convenience Store"
+msgstr "コンビニ決済（ペイジェント）"
 
 # @ woocommerce-paygent-main2
-#: includes/gateways/paygent/class-wc-gateway-paygent-cs.php:98
-msgid "PayPal standard"
-msgstr ""
+#: includes/gateways/paygent/class-wc-gateway-paygent-cs.php:41
+msgid "Paygent Convenience Store Payment Gateway"
+msgstr "コンビニ決済（ペイジェント）"
 
 # @ woocommerce-paygent-main2
-#: includes/gateways/paygent/class-wc-gateway-paygent-cs.php:99
+#: includes/gateways/paygent/class-wc-gateway-paygent-cs.php:42
+msgid "Allows payments by Paygent Convenience Store in Japan."
+msgstr "コンビニ決済（ペイジェント）を利用する"
+
+# @ woocommerce-paygent-main2
+#: includes/gateways/paygent/class-wc-gateway-paygent-cs.php:69
+msgid "Enable paygent Convenience Store Payment"
+msgstr "コンビニ決済（ペイジェント）を利用する"
+
+# @ woocommerce-paygent-main2
+#: includes/gateways/paygent/class-wc-gateway-paygent-cs.php:78
+msgid "Convenience Store (Paygent)"
+msgstr "コンビニ決済（ペイジェント）"
+
+# @ woocommerce-paygent-main2
+#: includes/gateways/paygent/class-wc-gateway-paygent-cs.php:84
+msgid "Pay at Convenience Store via Paygent."
+msgstr "コンビニで料金を支払う"
+
+# @ woocommerce-paygent-main2
+#: includes/gateways/paygent/class-wc-gateway-paygent-cs.php:117
+msgid "Please select Convenience Store where you want to pay"
+msgstr "お支払いをされるコンビニをお選び下さい"
+
+# @ woocommerce-paygent-main2
+#: includes/gateways/paygent/class-wc-gateway-paygent-mccc.php:29
+msgid "Proceed to Paygent Multi-currency Credit Card"
+msgstr "クレジットカード（多通貨決済）を利用する"
+
+# @ woocommerce-paygent-main2
+#: includes/gateways/paygent/class-wc-gateway-paygent-mccc.php:30
+#: includes/gateways/paygent/class-wc-gateway-paygent-mccc.php:128
+msgid "Paygent Multi-currency Credit Card"
+msgstr "クレジットカード（多通貨決済）"
+
+# @ woocommerce-paygent-main2
+#: includes/gateways/paygent/class-wc-gateway-paygent-mccc.php:41
+msgid "Paygent Multi-currency Credit Card Payment Gateway"
+msgstr "ペイジェントクレジット（多通貨決済）"
+
+# @ woocommerce-paygent-main2
+#: includes/gateways/paygent/class-wc-gateway-paygent-mccc.php:42
+msgid "Allows payments by Paygent Multi-currency Credit Card in Japan."
+msgstr "ペイジェントクレジット（多通貨決済）を利用する"
+
+# @ woocommerce-paygent-main2
+#: includes/gateways/paygent/class-wc-gateway-paygent-mccc.php:70
+msgid "Enable paygent Multi-currency Credit Card Payment"
+msgstr "ペイジェントクレジット（多通貨決済）を利用する"
+
+# @ woocommerce-paygent-main2
+#: includes/gateways/paygent/class-wc-gateway-paygent-mccc.php:79
+msgid "Multi-currency Credit Card (Paygent)"
+msgstr "クレジット（多通貨決済）ペイジェント"
+
+# @ woocommerce-paygent-main2
+#: includes/gateways/paygent/class-wc-gateway-paygent-mccc.php:111
 msgid ""
-"PayPal standard works by sending the user to PayPal to enter their payment "
-"information."
+"Please check you want to use paygent Test mode. But you need the contract "
+"with Paygent."
 msgstr ""
+"テストモードを使いたい場合はチェックしてください。ペジェンとの契約が必要で"
+"す。"
 
 # @ woocommerce-paygent-main2
-#: includes/gateways/paygent/class-wc-gateway-paygent-cs.php:111
-msgid "Gateway Disabled"
-msgstr ""
-
-# @ woocommerce-paygent-main2
-#: includes/gateways/paygent/class-wc-gateway-paygent-cs.php:111
-msgid "PayPal does not support your store currency."
-msgstr ""
-
-# @ woocommerce-paygent-main2
-#: includes/gateways/paygent/class-wc-gateway-paygent-cs.php:128
-msgid "Enable PayPal standard"
-msgstr ""
-
-# @ woocommerce-paygent-main2
-#: includes/gateways/paygent/class-wc-gateway-paygent-cs.php:142
+#: includes/gateways/paygent/class-wc-gateway-paygent-mccc.php:129
 msgid ""
-"Pay via PayPal; you can pay with your credit card if you don't have a PayPal "
-"account"
+"The PaygentMulti-currency  Credit Card Payment Gateway is simple and "
+"powerful.  The plugin works by adding credit card fields on the checkout "
+"page, and then sending the details to paygent Payment for verification.  <a "
+"href=\"http://www.paygent.co.jp/payment_service/package_cart/wordpress/"
+"\">Click here to read Paygent order</a>."
 msgstr ""
+"ペイジェントのクレジット多通貨決済機能はシンプルで使いやすいです。このプラグ"
+"インは決済ページにクレジット決済機能を追加し、決済情報をペイジェントに送信し"
+"ます。利用にはペイジェントと契約が必要です。<a href=\"http://www.paygent.co."
+"jp/payment_service/package_cart/wordpress/\">申し込みはこちらから</a>"
 
 # @ woocommerce-paygent-main2
-#: includes/gateways/paygent/class-wc-gateway-paygent-cs.php:145
-msgid "PayPal Email"
-msgstr ""
+#: includes/views/html-admin-info-screen.php:1
+msgid "Infomation of Japanese Support"
+msgstr "日本語サポート情報"
 
 # @ woocommerce-paygent-main2
-#: includes/gateways/paygent/class-wc-gateway-paygent-cs.php:147
+#: includes/views/html-admin-screen.php:3
+msgid "Setting"
+msgstr "設定"
+
+# @ woocommerce-paygent-main2
+#: includes/views/html-admin-screen.php:3
+msgid "Infomations"
+msgstr "情報"
+
+# @ woocommerce-paygent-main2
+#: includes/views/html-admin-setting-screen.php:4
+msgid "Paygent Initial Setting"
+msgstr "ペイジェント初期設定"
+
+# @ woocommerce-paygent-main2
+#: includes/views/html-admin-setting-screen.php:8
+msgid "Merchant ID"
+msgstr "マーチャントID"
+
+# @ woocommerce-paygent-main2
+#: includes/views/html-admin-setting-screen.php:11
+msgid "Please input Merchant ID from Paygent documents"
+msgstr "ペイジェントから送られてきた書類からマーチャントIDを入力下さい。"
+
+# @ woocommerce-paygent-main2
+#: includes/views/html-admin-setting-screen.php:15
+msgid "Connect ID"
+msgstr "接続ID"
+
+# @ woocommerce-paygent-main2
+#: includes/views/html-admin-setting-screen.php:18
+msgid "Please input Connect ID from Paygent documents"
+msgstr "ペイジェントから送られてきた書類から接続IDを入力下さい。"
+
+# @ woocommerce-paygent-main2
+#: includes/views/html-admin-setting-screen.php:22
+msgid "Connect Password"
+msgstr "接続パスワード"
+
+# @ woocommerce-paygent-main2
+#: includes/views/html-admin-setting-screen.php:25
+msgid "Please input Connect Password from Paygent documents"
+msgstr "ペイジェントから送られてきた書類から接続パスワードを入力下さい。"
+
+# @ woocommerce-paygent-main2
+#: includes/views/html-admin-setting-screen.php:29
+msgid "Site ID"
+msgstr "サイトID"
+
+# @ woocommerce-paygent-main2
+#: includes/views/html-admin-setting-screen.php:32
+msgid "Please input Site ID from Paygent documents"
+msgstr ""
+"サイトIDを入力してください。サイトが一つしか無い方は1を入力してください。"
+
+# @ woocommerce-paygent-main2
+#: includes/views/html-admin-setting-screen.php:36
+msgid "Client Cert File"
+msgstr "クライアント認証書"
+
+# @ woocommerce-paygent-main2
+#: includes/views/html-admin-setting-screen.php:39
+msgid "Please select Client Cert File from local."
+msgstr "ローカルのパソコンからクライアント認証書を選択してください。"
+
+# @ woocommerce-paygent-main2
+#: includes/views/html-admin-setting-screen.php:39
 msgid ""
-"Please enter your PayPal email address; this is needed in order to take "
-"payment."
+"If you want to change Client Cert File, please select New Client Cert File "
+"from local."
 msgstr ""
+"もし、クライアント認証書を変更したい場合は、ローカルのパソコンからクライアン"
+"ト認証書を選択してください。"
 
 # @ woocommerce-paygent-main2
-#: includes/gateways/paygent/class-wc-gateway-paygent-cs.php:153
-msgid "Receiver Email"
-msgstr ""
+#: includes/views/html-admin-setting-screen.php:43
+msgid "CA Cert File"
+msgstr "認証済みCAファイル"
 
 # @ woocommerce-paygent-main2
-#: includes/gateways/paygent/class-wc-gateway-paygent-cs.php:155
+#: includes/views/html-admin-setting-screen.php:46
+msgid "Please select CA Cert File from local."
+msgstr "ローカルのパソコンから認証済みCAファイルを選択してください。"
+
+# @ woocommerce-paygent-main2
+#: includes/views/html-admin-setting-screen.php:46
 msgid ""
-"If this differs from the email entered above, input your main receiver email "
-"for your PayPal account. This is used to validate IPN requests."
+"If you want to change CA Cert File, please select New CA Cert File from "
+"local."
 msgstr ""
+"もし、認証済みCAファイルを変更したい場合は、ローカルのパソコンから認証済みCA"
+"ファイルを選択してください。"
 
 # @ woocommerce-paygent-main2
-#: includes/gateways/paygent/class-wc-gateway-paygent-cs.php:161
-msgid "PayPal Identity Token"
-msgstr ""
+#: includes/views/html-admin-setting-screen.php:49
+msgid "Paygent Payment Method"
+msgstr "ペイジェント決済方法"
 
 # @ woocommerce-paygent-main2
-#: includes/gateways/paygent/class-wc-gateway-paygent-cs.php:163
+#: includes/views/html-admin-setting-screen.php:53
+#: includes/views/html-admin-setting-screen.php:55
+msgid "Credit Card"
+msgstr "クレジット決済"
+
+# @ woocommerce-paygent-main2
+#: includes/views/html-admin-setting-screen.php:56
+msgid "Please check it if you want to use the payment method of Credit Card"
+msgstr "もし、クレジット決済を利用したい場合はチェックして下さい。"
+
+# @ woocommerce-paygent-main2
+#: includes/views/html-admin-setting-screen.php:60
+#: includes/views/html-admin-setting-screen.php:62
+msgid "Convenience store"
+msgstr "コンビニ決済"
+
+# @ woocommerce-paygent-main2
+#: includes/views/html-admin-setting-screen.php:63
 msgid ""
-"Optionally enable \"Payment Data Transfer\" (Profile > Website Payment "
-"Preferences) and then copy your identity token here. This will allow "
-"payments to be verified without the need for PayPal IPN."
-msgstr ""
+"Please check it if you want to use the payment method of Convenience store"
+msgstr "もし、コンビニ決済を利用したい場合はチェックして下さい。"
 
 # @ woocommerce-paygent-main2
-#: includes/gateways/paygent/class-wc-gateway-paygent-cs.php:166
-#: includes/gateways/paygent/class-wc-gateway-paygent-cs.php:199
-msgid "Optional"
-msgstr ""
+#: includes/views/html-admin-setting-screen.php:67
+#: includes/views/html-admin-setting-screen.php:69
+msgid "Multi-currency Credit Card"
+msgstr "クレジット決済（多通貨）"
 
 # @ woocommerce-paygent-main2
-#: includes/gateways/paygent/class-wc-gateway-paygent-cs.php:169
-msgid "Invoice Prefix"
-msgstr ""
-
-# @ woocommerce-paygent-main2
-#: includes/gateways/paygent/class-wc-gateway-paygent-cs.php:171
+#: includes/views/html-admin-setting-screen.php:70
 msgid ""
-"Please enter a prefix for your invoice numbers. If you use your PayPal "
-"account for multiple stores ensure this prefix is unique as PayPal will not "
-"allow orders with the same invoice number."
-msgstr ""
+"Please check it if you want to use the payment method of Multi-currency "
+"Credit Card"
+msgstr "もし、クレジット決済（多通貨）を利用したい場合はチェックして下さい。"
 
 # @ woocommerce-paygent-main2
-#: includes/gateways/paygent/class-wc-gateway-paygent-cs.php:176
-msgid "Payment Action"
-msgstr ""
+#: includes/views/html-admin-setting-screen.php:74
+msgid "Save changes"
+msgstr "変更を保存"
 
 # @ woocommerce-paygent-main2
-#: includes/gateways/paygent/class-wc-gateway-paygent-cs.php:178
+#: woocommerce-paygent-main.php:120
 msgid ""
-"Choose whether you wish to capture funds immediately or authorize payment "
-"only."
+"WooCommerce for Paygent Main 2 method is enabled but not effective. It "
+"requires WooCommerce in order to work."
 msgstr ""
-
-# @ woocommerce-paygent-main2
-#: includes/gateways/paygent/class-wc-gateway-paygent-cs.php:182
-msgid "Capture"
-msgstr ""
-
-# @ woocommerce-paygent-main2
-#: includes/gateways/paygent/class-wc-gateway-paygent-cs.php:183
-msgid "Authorize"
-msgstr ""
-
-# @ woocommerce-paygent-main2
-#: includes/gateways/paygent/class-wc-gateway-paygent-cs.php:187
-msgid "Submission method"
-msgstr ""
-
-# @ woocommerce-paygent-main2
-#: includes/gateways/paygent/class-wc-gateway-paygent-cs.php:189
-msgid "Use form submission method."
-msgstr ""
-
-# @ woocommerce-paygent-main2
-#: includes/gateways/paygent/class-wc-gateway-paygent-cs.php:190
-msgid ""
-"Enable this to post order data to PayPal via a form instead of using a "
-"redirect/querystring."
-msgstr ""
-
-# @ woocommerce-paygent-main2
-#: includes/gateways/paygent/class-wc-gateway-paygent-cs.php:194
-msgid "Page Style"
-msgstr ""
-
-# @ woocommerce-paygent-main2
-#: includes/gateways/paygent/class-wc-gateway-paygent-cs.php:196
-msgid ""
-"Optionally enter the name of the page style you wish to use. These are "
-"defined within your PayPal account."
-msgstr ""
-
-# @ woocommerce-paygent-main2
-#: includes/gateways/paygent/class-wc-gateway-paygent-cs.php:202
-msgid "Shipping options"
-msgstr ""
-
-# @ woocommerce-paygent-main2
-#: includes/gateways/paygent/class-wc-gateway-paygent-cs.php:207
-msgid "Shipping details"
-msgstr ""
-
-# @ woocommerce-paygent-main2
-#: includes/gateways/paygent/class-wc-gateway-paygent-cs.php:209
-msgid "Send shipping details to PayPal instead of billing."
-msgstr ""
-
-# @ woocommerce-paygent-main2
-#: includes/gateways/paygent/class-wc-gateway-paygent-cs.php:210
-msgid ""
-"PayPal allows us to send 1 address. If you are using PayPal for shipping "
-"labels you may prefer to send the shipping address rather than billing."
-msgstr ""
-
-# @ woocommerce-paygent-main2
-#: includes/gateways/paygent/class-wc-gateway-paygent-cs.php:214
-msgid "Address override"
-msgstr ""
-
-# @ woocommerce-paygent-main2
-#: includes/gateways/paygent/class-wc-gateway-paygent-cs.php:216
-msgid ""
-"Enable \"address_override\" to prevent address information from being "
-"changed."
-msgstr ""
-
-# @ woocommerce-paygent-main2
-#: includes/gateways/paygent/class-wc-gateway-paygent-cs.php:217
-msgid ""
-"PayPal verifies addresses therefore this setting can cause errors (we "
-"recommend keeping it disabled)."
-msgstr ""
-
-# @ woocommerce-paygent-main2
-#: includes/gateways/paygent/class-wc-gateway-paygent-cs.php:226
-msgid "PayPal sandbox"
-msgstr ""
-
-# @ woocommerce-paygent-main2
-#: includes/gateways/paygent/class-wc-gateway-paygent-cs.php:228
-msgid "Enable PayPal sandbox"
-msgstr ""
-
-# @ woocommerce-paygent-main2
-#: includes/gateways/paygent/class-wc-gateway-paygent-cs.php:230
-#, php-format
-msgid ""
-"PayPal sandbox can be used to test payments. Sign up for a developer account "
-"<a href=\"%s\">here</a>."
-msgstr ""
-
-# @ woocommerce-paygent-main2
-#: includes/gateways/paygent/class-wc-gateway-paygent-cs.php:237
-#, php-format
-msgid ""
-"Log PayPal events, such as IPN requests, inside <code>woocommerce/logs/"
-"paypal-%s.txt</code>"
-msgstr ""
-
-# @ woocommerce-paygent-main2
-#: includes/gateways/paygent/class-wc-gateway-paygent-cs.php:361
-#, php-format
-msgid "Order %s"
-msgstr ""
-
-# @ woocommerce-paygent-main2
-#: includes/gateways/paygent/class-wc-gateway-paygent-cs.php:370
-msgid "Shipping via"
-msgstr ""
-
-# @ woocommerce-paygent-main2
-#: includes/gateways/paygent/class-wc-gateway-paygent-cs.php:427
-#, php-format
-msgid "Shipping via %s"
-msgstr ""
-
-# @ woocommerce-paygent-main2
-#: includes/gateways/paygent/class-wc-gateway-paygent-cs.php:466
-msgid ""
-"Thank you for your order. We are now redirecting you to PayPal to make "
-"payment."
-msgstr ""
-
-# @ woocommerce-paygent-main2
-#: includes/gateways/paygent/class-wc-gateway-paygent-cs.php:491
-msgid "Pay via PayPal"
-msgstr ""
-
-# @ woocommerce-paygent-main2
-#: includes/gateways/paygent/class-wc-gateway-paygent-cs.php:491
-msgid "Cancel order &amp; restore cart"
-msgstr ""
-
-# @ woocommerce-paygent-main2
-#: includes/gateways/paygent/class-wc-gateway-paygent-cs.php:546
-msgid ""
-"Thank you - your order is now pending payment. You should be automatically "
-"redirected to PayPal to make payment."
-msgstr ""
-
-# @ woocommerce-paygent-main2
-#: includes/gateways/paygent/class-wc-gateway-paygent-cs.php:701
-#, php-format
-msgid "Validation error: PayPal currencies do not match (code %s)."
-msgstr ""
-
-# @ woocommerce-paygent-main2
-#: includes/gateways/paygent/class-wc-gateway-paygent-cs.php:712
-#, php-format
-msgid "Validation error: PayPal amounts do not match (gross %s)."
-msgstr ""
-
-# @ woocommerce-paygent-main2
-#: includes/gateways/paygent/class-wc-gateway-paygent-cs.php:723
-#, php-format
-msgid ""
-"Validation error: PayPal IPN response from a different email address (%s)."
-msgstr ""
-
-# @ woocommerce-paygent-main2
-#: includes/gateways/paygent/class-wc-gateway-paygent-cs.php:746
-msgid "IPN payment completed"
-msgstr ""
-
-# @ woocommerce-paygent-main2
-#: includes/gateways/paygent/class-wc-gateway-paygent-cs.php:749
-#, php-format
-msgid "Payment pending: %s"
-msgstr ""
-
-# @ woocommerce-paygent-main2
-#: includes/gateways/paygent/class-wc-gateway-paygent-cs.php:762
-#: includes/gateways/paygent/class-wc-gateway-paygent-cs.php:770
-#: includes/gateways/paygent/class-wc-gateway-paygent-cs.php:787
-#, php-format
-msgid "Payment %s via IPN."
-msgstr ""
-
-# @ woocommerce-paygent-main2
-#: includes/gateways/paygent/class-wc-gateway-paygent-cs.php:775
-msgid "Order refunded/reversed"
-msgstr ""
-
-# @ woocommerce-paygent-main2
-#: includes/gateways/paygent/class-wc-gateway-paygent-cs.php:776
-#, php-format
-msgid "Order %s has been marked as refunded - PayPal reason code: %s"
-msgstr ""
-
-# @ woocommerce-paygent-main2
-#: includes/gateways/paygent/class-wc-gateway-paygent-cs.php:779
-#, php-format
-msgid "Payment for order %s refunded/reversed"
-msgstr ""
-
-# @ woocommerce-paygent-main2
-#: includes/gateways/paygent/class-wc-gateway-paygent-cs.php:792
-msgid "Order reversed"
-msgstr ""
-
-# @ woocommerce-paygent-main2
-#: includes/gateways/paygent/class-wc-gateway-paygent-cs.php:793
-#, php-format
-msgid ""
-"Order %s has been marked on-hold due to a reversal - PayPal reason code: %s"
-msgstr ""
-
-# @ woocommerce-paygent-main2
-#: includes/gateways/paygent/class-wc-gateway-paygent-cs.php:796
-#, php-format
-msgid "Payment for order %s reversed"
-msgstr ""
-
-# @ woocommerce-paygent-main2
-#: includes/gateways/paygent/class-wc-gateway-paygent-cs.php:804
-msgid "Reversal Cancelled"
-msgstr ""
-
-# @ woocommerce-paygent-main2
-#: includes/gateways/paygent/class-wc-gateway-paygent-cs.php:805
-#, php-format
-msgid ""
-"Order %s has had a reversal cancelled. Please check the status of payment "
-"and update the order status accordingly."
-msgstr ""
-
-# @ woocommerce-paygent-main2
-#: includes/gateways/paygent/class-wc-gateway-paygent-cs.php:808
-#, php-format
-msgid "Reversal cancelled for order %s"
-msgstr ""
-
-# @ woocommerce-paygent-main2
-#: includes/gateways/paygent/class-wc-gateway-paygent-cs.php:880
-#, php-format
-msgid "Validation error: PayPal amounts do not match (amt %s)."
-msgstr ""
-
-# @ woocommerce-paygent-main2
-#: includes/gateways/paygent/class-wc-gateway-paygent-cs.php:888
-msgid "PDT payment completed"
-msgstr ""
-
-# @ woocommerce-paygent-main2
-#. translators: plugin header field 'Name'
-#: woocommerce-paygent-main.php:0
-msgid "WooCommerce For Paygent Main 2 method"
-msgstr "WooCommerceペイジェントメイン支払い"
-
-# @ woocommerce-paygent-main2
-#. translators: plugin header field 'PluginURI'
-#: woocommerce-paygent-main.php:0
-msgid "http://wordpress.org/plugins/woocommerce-paygent-main2/"
-msgstr ""
-
-# @ woocommerce-paygent-main2
-#. translators: plugin header field 'Description'
-#: woocommerce-paygent-main.php:0
-msgid "Woocommerce Main 2 gateway payment"
-msgstr ""
-
-# @ woocommerce-paygent-main2
-#. translators: plugin header field 'Author'
-#: woocommerce-paygent-main.php:0
-msgid "Artisan Workshop"
-msgstr "職人工房"
-
-# @ woocommerce-paygent-main2
-#. translators: plugin header field 'AuthorURI'
-#: woocommerce-paygent-main.php:0
-msgid "http://profiles.wordpress.org/shoheitanaka"
-msgstr "http://profiles.wordpress.org/shoheitanaka"
-
-# @ woocommerce-paygent-main2
-#. translators: plugin header field 'Version'
-#: woocommerce-paygent-main.php:0
-msgid "0.9.0"
-msgstr "0.9.0"
+"WooCommerce for Paygentが利用可能ですが、使えません。WooCommerceプラグインを"
+"インストールし有効である必要があります。"

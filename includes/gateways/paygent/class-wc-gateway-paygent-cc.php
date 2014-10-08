@@ -7,11 +7,11 @@ if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
  *
  * Provides a Paygent Credit Card Payment Gateway.
  *
- * @class 		WC_Paygent
+ * @class 			WC_Paygent
  * @extends		WC_Gateway_Paygent_CC
- * @version		0.9.0
+ * @version		1.0.0
  * @package		WooCommerce/Classes/Payment
- * @author 		shohei.tanaka
+ * @author			Artisan Workshop
  */
 class WC_Gateway_Paygent_CC extends WC_Payment_Gateway {
 
@@ -28,6 +28,12 @@ class WC_Gateway_Paygent_CC extends WC_Payment_Gateway {
 		$this->has_fields        = false;
 		$this->order_button_text = __( 'Proceed to Paygent Credit Card', 'woocommerce-paygent-main2' );
 		$this->method_title      = __( 'Paygent Credit Card', 'woocommerce-paygent-main2' );
+		
+		//Paygent Setting IDs
+		$this->merchant_id = get_option('wc-paygent-mid');
+		$this->connect_id = get_option('wc-paygent-cid');
+		$this->connect_password = get_option('wc-paygent-cpass');
+		$this->site_id = get_option('wc-paygent-sid');
 
         // Create plugin fields and settings
 		$this->init_form_fields();
@@ -47,26 +53,11 @@ class WC_Gateway_Paygent_CC extends WC_Payment_Gateway {
 		}
 
 		// Actions
-		add_action( 'admin_notices',                                            array( $this, 'paygent_cc_commerce_ssl_check' ) );
 		add_action( 'woocommerce_receipt_paygent_cc',                              array( $this, 'receipt_page' ) );
 		add_action( 'woocommerce_update_options_payment_gateways',              array( $this, 'process_admin_options' ) );
 		add_action( 'woocommerce_update_options_payment_gateways_' . $this->id, array( $this, 'process_admin_options' ) );
 		add_action( 'wp_enqueue_scripts',                                       array( $this, 'add_paygent_cc_scripts' ) );
 	}
-      /**
-       * Check if SSL is enabled and notify the user.
-       */
-      function paygent_cc_commerce_ssl_check() {
-        if ( get_option( 'woocommerce_force_ssl_checkout' ) == 'no' && $this->enabled == 'yes' ) {
-            echo '<div class="error"><p>' . sprintf( __('Paygent Commerce is enabled and the <a href="%s">force SSL option</a> is disabled; your checkout is not secure! Please enable SSL and ensure your server has a valid SSL certificate.', 'woocommerce-paygent-main2' ), admin_url( 'admin.php?page=wc-settings&tab=checkout' ) ) . '</p></div>';
-            }
-       // * Check if Client Cert file and CA Cert file and notify the user.
-		if (!file_exists(CLIENT_FILE_PATH) or !file_exists(CA_FILE_PATH)){
-			if(!file_exists(CLIENT_FILE_PATH)) $cilent_msg = __(' Cilent Cert File do not exist. ', 'woocommerce-paygent-main2' );
-			if(!file_exists(CA_FILE_PATH)) $ca_msg = __(' CA Cert File do not exist. ', 'woocommerce-paygent-main2' );
-			echo '<div class="error"><p>' . __('Paygent Cert File do not exist. Please put Cert files.', 'woocommerce-paygent-main2' ) .$cilent_msg.$ca_msg. '</p></div>';
-		}
-      }
 
       /**
        * Initialize Gateway Settings Form Fields.
@@ -93,24 +84,6 @@ class WC_Gateway_Paygent_CC extends WC_Payment_Gateway {
 	        'description' => __( 'This controls the description which the user sees during checkout.', 'woocommerce-paygent-main2' ),
 	        'default'     => __( 'Pay with your credit card via Paygent.', 'woocommerce-paygent-main2' )
 	        ),
-	      'merchant_id'    => array(
-	        'title'       => __( 'Merchant ID', 'woocommerce-paygent-main2' ),
-	        'type'        => 'text',
-	        'description' => __( 'This is the Merchant ID generated within the paygent payment gateway.', 'woocommerce-paygent-main2' ),
-	        'default'     => ''
-	        ),
-	      'connect_id'    => array(
-	        'title'       => __( 'Connect ID', 'woocommerce-paygent-main2' ),
-	        'type'        => 'text',
-	        'description' => __( 'This is the Connect ID generated within the paygent payment gateway.', 'woocommerce-paygent-main2' ),
-	        'default'     => ''
-	        ),
-	      'connect_password'    => array(
-	        'title'       => __( 'Connect Password', 'woocommerce-paygent-main2' ),
-	        'type'        => 'text',
-	        'description' => __( 'This is the Connect Password generated within the paygent payment gateway.', 'woocommerce-paygent-main2' ),
-	        'default'     => ''
-	        ),
 			'security_check' => array(
 				'title'       => __( 'Security Check Code', 'woocommerce-paygent-main2' ),
 				'type'        => 'checkbox',
@@ -124,12 +97,6 @@ class WC_Gateway_Paygent_CC extends WC_Payment_Gateway {
 				'label'       => __( 'Enable Store Card Infomation', 'woocommerce-paygent-main2' ),
 				'default'     => 'no',
 				'description' => sprintf( __( 'Store user Credit Card information in Paygent Server.(Option)', 'woocommerce-paygent-main2' )),
-			),
-			'site_id' => array(
-				'title'       => __( 'Site ID', 'woocommerce-paygent-main2' ),
-				'type'        => 'text',
-				'default'     => '',
-				'description' => sprintf( __( 'This is the Site ID generated within the paygent payment gateway. If you have some EC site.', 'woocommerce-paygent-main2' )),
 			),
 			'testing' => array(
 				'title'       => __( 'Gateway Testing', 'woocommerce-paygent-main2' ),

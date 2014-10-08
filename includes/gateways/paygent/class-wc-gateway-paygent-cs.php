@@ -7,11 +7,11 @@ if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
  *
  * Provides a Paygent Convenience Store Payment Gateway.
  *
- * @class 		WC_Paygent
+ * @class 			WC_Paygent
  * @extends		WC_Gateway_Paygent_CS
- * @version		0.9.0
+ * @version		1.0.0
  * @package		WooCommerce/Classes/Payment
- * @author 		shohei.tanaka
+ * @author			Artisan Workshop
  */
 class WC_Gateway_Paygent_CS extends WC_Payment_Gateway {
 
@@ -28,6 +28,12 @@ class WC_Gateway_Paygent_CS extends WC_Payment_Gateway {
 		$this->has_fields        = false;
 		$this->order_button_text = __( 'Proceed to Paygent Convenience Store', 'woocommerce-paygent-main2' );
 		$this->method_title      = __( 'Paygent Convenience Store', 'woocommerce-paygent-main2' );
+
+		//Paygent Setting IDs
+		$this->merchant_id = get_option('wc-paygent-mid');
+		$this->connect_id = get_option('wc-paygent-cid');
+		$this->connect_password = get_option('wc-paygent-cpass');
+		$this->site_id = get_option('wc-paygent-sid');
 
         // Create plugin fields and settings
 		$this->init_form_fields();
@@ -77,30 +83,6 @@ class WC_Gateway_Paygent_CS extends WC_Payment_Gateway {
 	        'description' => __( 'This controls the description which the user sees during checkout.', 'woocommerce-paygent-main2' ),
 	        'default'     => __( 'Pay at Convenience Store via Paygent.', 'woocommerce-paygent-main2' )
 	        ),
-	      'merchant_id'    => array(
-	        'title'       => __( 'Merchant ID', 'woocommerce-paygent-main2' ),
-	        'type'        => 'text',
-	        'description' => __( 'This is the Merchant ID generated within the paygent payment gateway.', 'woocommerce-paygent-main2' ),
-	        'default'     => ''
-	        ),
-	      'connect_id'    => array(
-	        'title'       => __( 'Connect ID', 'woocommerce-paygent-main2' ),
-	        'type'        => 'text',
-	        'description' => __( 'This is the Connect ID generated within the paygent payment gateway.', 'woocommerce-paygent-main2' ),
-	        'default'     => ''
-	        ),
-	      'connect_password'    => array(
-	        'title'       => __( 'Connect Password', 'woocommerce-paygent-main2' ),
-	        'type'        => 'text',
-	        'description' => __( 'This is the Connect Password generated within the paygent payment gateway.', 'woocommerce-paygent-main2' ),
-	        'default'     => ''
-	        ),
-			'site_id' => array(
-				'title'       => __( 'Site ID', 'woocommerce-paygent-main2' ),
-				'type'        => 'text',
-				'default'     => '',
-				'description' => sprintf( __( 'This is the Site ID generated within the paygent payment gateway. If you have some EC site.', 'woocommerce-paygent-main2' )),
-			),
 			'testing' => array(
 				'title'       => __( 'Gateway Testing', 'woocommerce-paygent-main2' ),
 				'type'        => 'title',

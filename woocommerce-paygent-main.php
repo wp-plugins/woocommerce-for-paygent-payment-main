@@ -3,11 +3,11 @@
  * Plugin Name: WooCommerce For Paygent Main 2 method
  * Plugin URI: http://wordpress.org/plugins/woocommerce-paygent-main2/
  * Description: Woocommerce Main 2 gateway payment 
- * Version: 0.9.0
+ * Version: 1.0.0
  * Author: Artisan Workshop
- * Author URI: http://profiles.wordpress.org/shoheitanaka
+ * Author URI: http://wc.artws.info/
  * Requires at least: 3.8
- * Tested up to: 3.9
+ * Tested up to: 4.0
  *
  * Text Domain: woocommerce-paygent-main2
  * Domain Path: /i18n/
@@ -26,6 +26,7 @@ if ( ! class_exists( 'WooCommercePaygentMain2' ) ) :
  * Load plugin functions.
  */
 add_action( 'plugins_loaded', 'WooCommercePaygentMain2_plugin', 0 );
+register_activation_hook( __FILE__, array( 'WooCommercePaygentMain2', 'plugin_activation' ) );
 
 class WooCommercePaygentMain2{
 
@@ -48,7 +49,7 @@ class WooCommercePaygentMain2{
 		define('CA_FILE_PATH', WP_CONTENT_DIR.'/uploads/wc-paygent/curl-ca-bundle.crt');
 		define('WC_PAYGENT_PLUGIN_PATH',plugin_dir_path( __FILE__ ));
 		define('PAYGENT_TIMEOUT_VALUE', 35);//Time out value
-		define('PAYGENT_DEBUG_FALG', 0);//Debug Option
+		define('PAYGENT_DEBUG_FLG', 0);//Debug Option
 		define('PAYGENT_SELCET_MAX_CNT', 2000);//Maximum query Count upto 2000
 		define('PAYGENT_TELEGRAM_KIND_REF', '027,090');//Telegram kind reffrence
 		define('URL01', 'https://mdev2.paygent.co.jp/n/atm/request');//ATM決済URL
@@ -77,8 +78,12 @@ class WooCommercePaygentMain2{
 		include_once('jp/co/ks/merchanttool/connectmodule/exception/PaygentB2BModuleException.php');
 
 		// 2 Main Payment Gateway
-		include_once( plugin_dir_path( __FILE__ ).'/includes/gateways/paygent/class-wc-gateway-paygent-cc.php' );	// Credit Card
-		include_once( plugin_dir_path( __FILE__ ).'/includes/gateways/paygent/class-wc-gateway-paygent-cs.php' );	// Convenience store
+		if(get_option('wc-paygent-cc')) include_once( plugin_dir_path( __FILE__ ).'/includes/gateways/paygent/class-wc-gateway-paygent-cc.php' );	// Credit Card
+		if(get_option('wc-paygent-cs')) include_once( plugin_dir_path( __FILE__ ).'/includes/gateways/paygent/class-wc-gateway-paygent-cs.php' );	// Convenience store
+		if(get_option('wc-paygent-mccc')) include_once( plugin_dir_path( __FILE__ ).'/includes/gateways/paygent/class-wc-gateway-paygent-mccc.php' );	// Multi-currency Credit Card
+
+		// Admin Setting Screen 
+		include_once( plugin_dir_path( __FILE__ ).'/includes/class-wc-admin-screen-paygent.php' );
 	}
 	/**
 	 * Init WooCommerce when WordPress Initialises.
@@ -98,10 +103,25 @@ class WooCommercePaygentMain2{
 		// Global + Frontend Locale
 		load_plugin_textdomain( 'woocommerce-paygent-main2', false, plugin_basename( dirname( __FILE__ ) ) . "/i18n" );
 	}
-
+	public function plugin_activation(){
+		$wc_paybent_dir = WP_CONTENT_DIR.'/uploads/wc-paygent';
+		if( !is_dir( $wc_paybent_dir ) ){
+		mkdir($wc_paybent_dir, 0755);
+		}
+	}
 }
 
 endif;
+//If WooCommerce Plugins is not activate notice
+function wcPaygentMain2_fallback_notice(){
+	?>
+    <div class="error">
+        <ul>
+            <li><?php echo __( 'WooCommerce for Paygent Main 2 method is enabled but not effective. It requires WooCommerce in order to work.', 'woocommerce-paygent-main2' );?></li>
+        </ul>
+    </div>
+    <?php
+}
 function WooCommercePaygentMain2_plugin() {
     if ( in_array( 'woocommerce/woocommerce.php', apply_filters( 'active_plugins', get_option( 'active_plugins' ) ) ) ) {
         $wcPaygentMain2 = new WooCommercePaygentMain2();
