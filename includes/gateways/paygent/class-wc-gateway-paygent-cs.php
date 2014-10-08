@@ -46,7 +46,7 @@ class WC_Gateway_Paygent_CS extends WC_Payment_Gateway {
 
 		// Load plugin checkout icon
 //		$this->icon = WP_CONTENT_DIR . '/plugins/woocommerce-paygent-main/images/paygent-cards.png';
-		$this->icon = plugins_url( 'images/paygent-cv.png' , __FILE__ );
+//		$this->icon = plugins_url( 'images/paygent-cv.png' , __FILE__ );
 		// Logs
 		if ( 'yes' == $this->debug ) {
 			$this->log = new WC_Logger();
