@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: WooCommerce For Paygent Main 2 method v1.0.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2014-10-09 05:46+0900\n"
+"PO-Revision-Date: 2014-11-11 14:28+0900\n"
 "Last-Translator: Shohei Tanaka <shohei.tanaka@artisanworkshop.biz>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -554,6 +554,21 @@ msgstr "情報"
 #: includes/views/html-admin-setting-screen.php:4
 msgid "Paygent Initial Setting"
 msgstr "ペイジェント初期設定"
+
+# @ woocommerce-paygent-main2
+#: includes/views/html-admin-setting-screen.php:5
+msgid "IP Address : "
+msgstr "IPアドレス（電文送信サーバーIPアドレス） : "
+
+# @ woocommerce-paygent-main2
+#: includes/views/html-admin-setting-screen.php:6
+msgid "libcurl Version : "
+msgstr "libcurlバージョン : "
+
+# @ woocommerce-paygent-main2
+#: includes/views/html-admin-setting-screen.php:7
+msgid "※In the case of PHP 5.0.0 or later, you need libcurl 7.10.5 or later."
+msgstr "※PHP 5.0.0 以降の場合は、libcurl 7.10.5 以降が必要です。"
 
 # @ woocommerce-paygent-main2
 #: includes/views/html-admin-setting-screen.php:8

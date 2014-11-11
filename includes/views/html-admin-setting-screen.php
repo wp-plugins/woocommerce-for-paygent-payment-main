@@ -2,6 +2,10 @@
 <form id="wc-paygent-setting-form" method="post" action=""  enctype="multipart/form-data">
 <?php wp_nonce_field( 'my-nonce-key','wc-paygent-setting');?>
 <h3><?php echo __( 'Paygent Initial Setting', 'woocommerce-paygent-main2' );?></h3>
+<p style="border:1px solid #666; width:50%; padding:10px;"><b><?php echo __( 'IP Address : ', 'woocommerce-paygent-main2' );?></b><?php echo $_SERVER["REMOTE_ADDR"];?><br />
+<b><?php echo __( 'libcurl Version : ', 'woocommerce-paygent-main2' );?></b><?php $version = curl_version(); echo $version["version"];?><br />
+<?php echo __( '※In the case of PHP 5.0.0 or later, you need libcurl 7.10.5 or later.', 'woocommerce-paygent-main2' );?>
+</p>
 <table class="form-table">
 <tr valign="top">
     <th scope="row" class="titledesc">

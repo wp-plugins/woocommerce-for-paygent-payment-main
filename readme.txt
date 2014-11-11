@@ -4,7 +4,7 @@ Donate link: http://wc.artws.info/
 Tags: credit cards, woocommerce, ecommerce, e-commerce, payment, payment Gateway, japan, payment
 Requires at least: 3.8
 Tested up to: 4.0
-Stable tag: 1.0.0
+Stable tag: 1.0.1
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -63,12 +63,13 @@ The manual installation method involves downloading our plugin and uploading it 
 = In Japanese: =
 
 質問： 日本語向けのフォーラムとか無いんですか？<br />
-答え： 現在、準備中です。今しばらくお待ちください。
+答え： こちらのサイトで日本語のサポートフォーラムがございます。<br />
+<a href="http://support.artws.info/" target="_blank">職人工房プラグインサポートフォーラム</a>
 
 = In English: =
 
 Q: Do you have the forum of this plugin in Japanese?<br />
-A: Is preparing.
+A: Here it is. <a href="http://support.artws.info/" target="_blank">Artisan Workshop Plugins Support Forum</a>
 
 == Screenshots ==
 
