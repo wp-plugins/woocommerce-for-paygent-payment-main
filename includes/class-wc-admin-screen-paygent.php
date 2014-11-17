@@ -70,6 +70,12 @@ class WC_Admin_Screen_Paygent {
 			if(!file_exists(CA_FILE_PATH)) $ca_msg = __('CA Cert File do not exist. ', 'woocommerce-paygent-main2' );
 			echo '<div class="error"><ul><li>' . __('Paygent Cert File do not exist. Please put Cert files.', 'woocommerce-paygent-main2' ) .$cilent_msg.$ca_msg. '</li></ul></div>';
 		}
+       // * Check if Client Cert file and CA Cert file uploaded files is fault.
+		if ($this->pem_error_message or $this->crt_error_message){
+			if($this->pem_error_message) $cilent_msg = $this->pem_error_message;
+			if($this->crt_error_message) $ca_msg = $this->crt_error_message;
+			echo '<div class="error"><ul><li>' . __('Mistake your uploaded file.', 'woocommerce-paygent-main2' ) .$cilent_msg.$ca_msg. '</li></ul></div>';
+		}
 	}
 
       /**
@@ -101,16 +107,30 @@ class WC_Admin_Screen_Paygent {
 					update_option( 'wc-paygent-sid', $_POST['paygent_sid']);
 				}
 				//Client Cert File upload
+				if(substr($_FILES["clientc_file"]["name"], strrpos($_FILES["clientc_file"]["name"], '.') + 1)=='pem'){
 				if (move_uploaded_file($_FILES["clientc_file"]["tmp_name"], WP_CONTENT_DIR.'/uploads/wc-paygent/client_cert.pem')) {
 				    chmod(WP_CONTENT_DIR.'/uploads/wc-paygent/client_cert.pem' , 0644);
 				} else {
 					//error_log
 				}
+				}else{
+					if($_FILES["clientc_file"]["name"]){
+					//error_message
+						$this->pem_error_message = __('Uploaded flie is not Client Cert File. Please check .pem file.', 'woocommerce-paygent-main2' );
+					}
+				}
 				//CA Cert File upload
+				if(substr($_FILES["cac_file"]["name"], strrpos($_FILES["cac_file"]["name"], '.') + 1)=='crt'){
 				if (move_uploaded_file($_FILES["cac_file"]["tmp_name"], WP_CONTENT_DIR.'/uploads/wc-paygent/curl-ca-bundle.crt')) {
 				    chmod(WP_CONTENT_DIR.'/uploads/wc-paygent/curl-ca-bundle.crt', 0644);
 				} else {
 					//error_log
+				}
+				}else{
+					if($_FILES["cac_file"]["name"]){
+					//error_message
+						$this->crt_error_message = __('Uploaded flie is not CA Cert File. Please check .crt file.', 'woocommerce-paygent-main2' );
+					}
 				}
 				//Credit Card payment method
 				$woocommerce_paygent_cc = get_option('woocommerce_paygent_cc_settings');

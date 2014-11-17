@@ -126,7 +126,6 @@ class WC_Gateway_Paygent_CC extends WC_Payment_Gateway {
        */
 			function admin_options() { ?>
 				<h3><?php _e( 'Paygent Credit Card','woocommerce-paygent-main2' ); ?></h3>
-			    <p><?php _e( 'The Paygent Credit Card Payment Gateway is simple and powerful.  The plugin works by adding credit card fields on the checkout page, and then sending the details to paygent Payment for verification.  <a href="http://www.wp-pay.com/payment-agency/paygent/">Click here to read Paygent order</a>.', 'woocommerce-paygent-main2' ); ?></p>
 			    <table class="form-table">
 					<?php $this->generate_settings_html(); ?>
 				</table>
@@ -152,7 +151,7 @@ class WC_Gateway_Paygent_CC extends WC_Payment_Gateway {
                                     		<input type="radio" name="stored-info-<?php echo $i;?>" value="<?php echo $i;?>" id="stored-info">
 										<?php _e( 'credit card last 4 numbers: ', 'woocommerce-paygent-main2' ) ?><?php echo substr($customer_check[$i]['card_number'],-4); ?> (<?php echo $customer_check[$i]['card_brand']; ?>)
                                     <?php }?><?php endif;?>
-				                    <?php print_r($customer_check);?></p>
+				                    </p>
 						</fieldset>
 						<fieldset>
 							<p>
@@ -585,3 +584,17 @@ class WC_Gateway_Paygent_CC extends WC_Payment_Gateway {
 
 	add_filter( 'woocommerce_payment_gateways', 'add_wc_paygent_cc_gateway' );
 
+	/**
+	 * Edit the available gateway to woocommerce
+	 */
+	function edit_available_gateways( $methods ) {
+		if ( ! $currency ) {
+			$currency = get_woocommerce_currency();
+		}
+		if($currency !='JPY'){
+		unset($methods['paygent_cc']);
+		}
+		return $methods;
+	}
+
+	add_filter( 'woocommerce_available_payment_gateways', 'edit_available_gateways' );

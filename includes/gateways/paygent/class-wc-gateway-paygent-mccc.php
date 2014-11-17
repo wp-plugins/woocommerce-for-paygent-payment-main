@@ -126,7 +126,6 @@ class WC_Gateway_Paygent_MCCC extends WC_Payment_Gateway {
        */
 			function admin_options() { ?>
 				<h3><?php _e( 'Paygent Multi-currency Credit Card','woocommerce-paygent-main2' ); ?></h3>
-			    <p><?php _e( 'The PaygentMulti-currency  Credit Card Payment Gateway is simple and powerful.  The plugin works by adding credit card fields on the checkout page, and then sending the details to paygent Payment for verification.  <a href="http://www.paygent.co.jp/payment_service/package_cart/wordpress/">Click here to read Paygent order</a>.', 'woocommerce-paygent-main2' ); ?></p>
 			    <table class="form-table">
 					<?php $this->generate_settings_html(); ?>
 				</table>
@@ -152,7 +151,7 @@ class WC_Gateway_Paygent_MCCC extends WC_Payment_Gateway {
                                     		<input type="radio" name="stored-info-<?php echo $i;?>" value="<?php echo $i;?>" id="stored-info">
 										<?php _e( 'credit card last 4 numbers: ', 'woocommerce-paygent-main2' ) ?><?php echo substr($customer_check[$i]['card_number'],-4); ?> (<?php echo $customer_check[$i]['card_brand']; ?>)
                                     <?php }?><?php endif;?>
-				                    <?php print_r($customer_check);?></p>
+				                    </p>
 						</fieldset>
 						<fieldset>
 							<p>
@@ -247,12 +246,18 @@ class WC_Gateway_Paygent_MCCC extends WC_Payment_Gateway {
 		$order_process->reqPut('connect_id',$this->connect_id);
 		$order_process->reqPut('connect_password',$this->connect_password);
 		$order_process->reqPut('telegram_version','1.0');
-		$order_process->reqPut('telegram_kind','020');//Card Payment Auto
+		$order_process->reqPut('telegram_kind','180');//Card Payment Auto
 		$order_process->reqPut('trading_id','wc_'.$order->id);
 		$order_process->reqPut('payment_id','');
 		
 		$order_process->reqPut('payment_amount',$order->order_total);
-		
+
+		//Get Currency infomation
+		if ( ! $currency ) {
+			$currency = get_woocommerce_currency();
+		}
+		$order_process->reqPut('currency_code',$currency);
+
       // Create server request using stored or new payment details
 		if ( $this->get_post( 'paygent-use-stored-payment-info' ) == 'yes' ) {
 			$order_process->reqPut('stock_card_mode',1);
@@ -585,3 +590,18 @@ class WC_Gateway_Paygent_MCCC extends WC_Payment_Gateway {
 
 	add_filter( 'woocommerce_payment_gateways', 'add_wc_paygent_mccc_gateway' );
 
+
+	/**
+	 * Edit the available gateway to woocommerce
+	 */
+	function edit_available_gateways_mccc( $methods ) {
+		if ( ! $currency ) {
+			$currency = get_woocommerce_currency();
+		}
+		if($currency =='JPY'){
+		unset($methods['woocommerce_paygent_mccc']);
+		}
+		return $methods;
+	}
+
+	add_filter( 'woocommerce_available_payment_gateways', 'edit_available_gateways_mccc' );

@@ -4,7 +4,7 @@ Donate link: http://wc.artws.info/
 Tags: credit cards, woocommerce, ecommerce, e-commerce, payment, payment Gateway, japan, payment
 Requires at least: 3.8
 Tested up to: 4.0
-Stable tag: 1.0.1
+Stable tag: 1.0.2
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -77,6 +77,8 @@ A: Here it is. <a href="http://support.artws.info/" target="_blank">Artisan Work
 2. Credit Input Form
 
 == Changelog ==
+= 1.0.2 =
+Bug Fix and Add some Varidations.
 = 1.0.0 =
 Major Version Update
 = 0.9.0 =

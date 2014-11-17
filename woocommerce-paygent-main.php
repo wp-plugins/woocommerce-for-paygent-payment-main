@@ -1,9 +1,9 @@
 <?php
 /**
- * Plugin Name: WooCommerce For Paygent Main 2 method
+ * Plugin Name: WooCommerce For Paygent Main 3 method
  * Plugin URI: http://wordpress.org/plugins/woocommerce-paygent-main2/
- * Description: Woocommerce Main 2 gateway payment 
- * Version: 1.0.1
+ * Description: Woocommerce Main 3 gateway payment 
+ * Version: 1.0.2
  * Author: Artisan Workshop
  * Author URI: http://wc.artws.info/
  * Requires at least: 3.8
