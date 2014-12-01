@@ -108,11 +108,11 @@ class WC_Admin_Screen_Paygent {
 				}
 				//Client Cert File upload
 				if(substr($_FILES["clientc_file"]["name"], strrpos($_FILES["clientc_file"]["name"], '.') + 1)=='pem'){
-				if (move_uploaded_file($_FILES["clientc_file"]["tmp_name"], WP_CONTENT_DIR.'/uploads/wc-paygent/client_cert.pem')) {
-				    chmod(WP_CONTENT_DIR.'/uploads/wc-paygent/client_cert.pem' , 0644);
-				} else {
-					//error_log
-				}
+					if (move_uploaded_file($_FILES["clientc_file"]["tmp_name"], WP_CONTENT_DIR.'/uploads/wc-paygent/client_cert.pem')) {
+					    chmod(WP_CONTENT_DIR.'/uploads/wc-paygent/client_cert.pem' , 0644);
+					} else {
+						//error_log
+					}
 				}else{
 					if($_FILES["clientc_file"]["name"]){
 					//error_message
@@ -121,11 +121,11 @@ class WC_Admin_Screen_Paygent {
 				}
 				//CA Cert File upload
 				if(substr($_FILES["cac_file"]["name"], strrpos($_FILES["cac_file"]["name"], '.') + 1)=='crt'){
-				if (move_uploaded_file($_FILES["cac_file"]["tmp_name"], WP_CONTENT_DIR.'/uploads/wc-paygent/curl-ca-bundle.crt')) {
-				    chmod(WP_CONTENT_DIR.'/uploads/wc-paygent/curl-ca-bundle.crt', 0644);
-				} else {
-					//error_log
-				}
+					if (move_uploaded_file($_FILES["cac_file"]["tmp_name"], WP_CONTENT_DIR.'/uploads/wc-paygent/curl-ca-bundle.crt')) {
+					    chmod(WP_CONTENT_DIR.'/uploads/wc-paygent/curl-ca-bundle.crt', 0644);
+					} else {
+						//error_log
+					}
 				}else{
 					if($_FILES["cac_file"]["name"]){
 					//error_message
@@ -176,6 +176,12 @@ class WC_Admin_Screen_Paygent {
 						$woocommerce_paygent_mccc['enabled'] = 'no';
 						update_option( 'woocommerce_paygent_mccc_settings', $woocommerce_paygent_mccc);
 					}
+				}
+				//Test Mode Setting
+				if(isset($_POST['paygent_testmode']) && $_POST['paygent_testmode']){
+					update_option( 'wc-paygent-testmode', $_POST['paygent_testmode']);
+				}else{
+					update_option( 'wc-paygent-testmode', '');
 				}
 			}
 		}

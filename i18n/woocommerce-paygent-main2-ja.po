@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: WooCommerce For Paygent Main 2 method v1.0.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2014-11-18 05:23+0900\n"
+"PO-Revision-Date: 2014-12-02 06:33+0900\n"
 "Last-Translator: Shohei Tanaka <shohei.tanaka@artisanworkshop.biz>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -22,7 +22,7 @@ msgstr ""
 # @ woocommerce-paygent-main2
 #. translators: plugin header field 'Name'
 #: includes/class-wc-admin-screen-paygent.php:0 woocommerce-paygent-main.php:0
-msgid "WooCommerce For Paygent Main 3 method"
+msgid "WooCommerce For Paygent Main 2 method"
 msgstr "WooCommerce For Paygent"
 
 # @ woocommerce-paygent-main2
@@ -34,10 +34,9 @@ msgstr "http://wordpress.org/plugins/woocommerce-paygent-main2/"
 # @ woocommerce-paygent-main2
 #. translators: plugin header field 'Description'
 #: includes/class-wc-admin-screen-paygent.php:0 woocommerce-paygent-main.php:0
-msgid "Woocommerce Main 3 gateway payment"
+msgid "Woocommerce Main 2 gateway payment"
 msgstr ""
-"WooCommerce向けペイジェント決済のクレジットカード（多通貨含む）とコンビ二決済"
-"用プラグイン"
+"WooCommerce向けペイジェント決済のクレジットカードとコンビ二決済用プラグイン"
 
 # @ woocommerce-paygent-main2
 #. translators: plugin header field 'Author'
@@ -54,8 +53,8 @@ msgstr "http://wc.artws.info/"
 # @ woocommerce-paygent-main2
 #. translators: plugin header field 'Version'
 #: includes/class-wc-admin-screen-paygent.php:0 woocommerce-paygent-main.php:0
-msgid "1.0.2"
-msgstr "1.0.2"
+msgid "1.0.0"
+msgstr "1.0.0"
 
 # @ woocommerce-paygent-main2
 #: includes/class-wc-admin-screen-paygent.php:38
@@ -564,7 +563,7 @@ msgstr "IPアドレス（電文送信サーバーIPアドレス） : "
 # @ woocommerce-paygent-main2
 #: includes/views/html-admin-setting-screen.php:6
 msgid "libcurl Version : "
-msgstr "libcurlバージョン : "
+msgstr "libcurlバージョン"
 
 # @ woocommerce-paygent-main2
 #: includes/views/html-admin-setting-screen.php:7
@@ -704,3 +703,38 @@ msgid ""
 msgstr ""
 "WooCommerce for Paygentが利用可能ですが、使えません。WooCommerceプラグインを"
 "インストールし有効である必要があります。"
+
+# @ woocommerce-paygent-main2
+#: includes/views/html-admin-setting-screen.php:82
+msgid "Test Mode"
+msgstr "テストモード設定"
+
+# @ woocommerce-paygent-main2
+#: includes/views/html-admin-setting-screen.php:84
+msgid "Please check it if you want to use Testmode"
+msgstr "もしテストモードで利用したい場合はここにチェックを入れて下さい。"
+
+# @ woocommerce-paygent-main2
+#: includes/gateways/paygent/class-wc-gateway-paygent-cs.php:242
+msgid "Convenience store payment details"
+msgstr "コンビニ支払い詳細"
+
+# @ woocommerce-paygent-main2
+#: includes/gateways/paygent/class-wc-gateway-paygent-cs.php:243
+msgid "Receipt Number : "
+msgstr "支払い番号 : "
+
+# @ woocommerce-paygent-main2
+#: includes/gateways/paygent/class-wc-gateway-paygent-cs.php:243
+msgid "URL : "
+msgstr "案内URL : "
+
+# @ woocommerce-paygent-main2
+#: includes/gateways/paygent/class-wc-gateway-paygent-cs.php:243
+msgid "limit Date : "
+msgstr "支払期限 : "
+
+# @ woocommerce-paygent-main2
+#: includes/gateways/paygent/class-wc-gateway-paygent-cs.php:243
+msgid "Convenience store : "
+msgstr "利用可能コンビニ : "

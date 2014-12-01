@@ -9,7 +9,7 @@ if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
  *
  * @class 			WC_Paygent
  * @extends		WC_Gateway_Paygent_MCCC
- * @version		1.0.0
+ * @version		1.0.4
  * @package		WooCommerce/Classes/Payment
  * @author			Artisan Workshop
  */
@@ -24,7 +24,7 @@ class WC_Gateway_Paygent_MCCC extends WC_Payment_Gateway {
 	 */
 	public function __construct() {
 
-		$this->id                = 'woocommerce_paygent_mccc';
+		$this->id                = 'paygent_mccc';
 		$this->has_fields        = false;
 		$this->order_button_text = __( 'Proceed to Paygent Multi-currency Credit Card', 'woocommerce-paygent-main2' );
 		$this->method_title      = __( 'Paygent Multi-currency Credit Card', 'woocommerce-paygent-main2' );
@@ -97,25 +97,6 @@ class WC_Gateway_Paygent_MCCC extends WC_Payment_Gateway {
 				'label'       => __( 'Enable Store Card Infomation', 'woocommerce-paygent-main2' ),
 				'default'     => 'no',
 				'description' => sprintf( __( 'Store user Credit Card information in Paygent Server.(Option)', 'woocommerce-paygent-main2' )),
-			),
-			'testing' => array(
-				'title'       => __( 'Gateway Testing', 'woocommerce-paygent-main2' ),
-				'type'        => 'title',
-				'description' => '',
-			),
-			'testmode' => array(
-				'title'       => __( 'paygent Test mode', 'woocommerce-paygent-main2' ),
-				'type'        => 'checkbox',
-				'label'       => __( 'Enable paygent Test mode', 'woocommerce-paygent-main2' ),
-				'default'     => 'no',
-				'description' => sprintf( __( 'Please check you want to use paygent Test mode. But you need the contract with Paygent.', 'woocommerce-paygent-main2' )),
-			),
-			'debug' => array(
-				'title'       => __( 'Debug Log', 'woocommerce-paygent-main2' ),
-				'type'        => 'checkbox',
-				'label'       => __( 'Enable logging', 'woocommerce-paygent-main2' ),
-				'default'     => 'no',
-				'description' => sprintf( __( 'Log Paygent events, such as IPN requests, inside <code>woocommerce/logs/paygent-%s.txt</code>', 'woocommerce-paygent-main2' ), sanitize_file_name( wp_hash( 'paygent' ) ) ),
 			)
 		);
 		}
@@ -140,6 +121,7 @@ class WC_Gateway_Paygent_MCCC extends WC_Payment_Gateway {
       		<?php } ?>
 			<fieldset  style="padding-left: 40px;">
 		        <?php
+				if($this->store_card_info =='yes'){
 		          $user = wp_get_current_user();
 				  $customer_check = $this->user_has_stored_data( $user->ID );
 		          if ( $customer_check['result']==1 and $customer_check['responseCode']!="P026") { ?>
@@ -147,10 +129,12 @@ class WC_Gateway_Paygent_MCCC extends WC_Payment_Gateway {
 							<input type="radio" name="paygent-use-stored-payment-info" id="paygent-use-stored-payment-info-yes" value="yes" checked="checked" onclick="document.getElementById('paygent-new-info').style.display='none'; document.getElementById('paygent-stored-info').style.display='block'"; /><label for="paygent-use-stored-payment-info-yes" style="display: inline;"><?php _e( 'Use a stored credit card from Paygent', 'woocommerce-paygent-main2' ) ?></label>
 								<div id="paygent-stored-info" style="padding: 10px 0 0 40px; clear: both;">
 				                    <p><?php if($customer_check['result']==1):?>
-                                    <?php $card_qty = count($customer_check['result_array'])-1; for($i=0; $i <= $card_qty; $i++) { ?>
+                                    <?php $card_qty = count($customer_check['result_array'])-1; 
+									for($i=0; $i <= $card_qty; $i++) { ?>
                                     		<input type="radio" name="stored-info-<?php echo $i;?>" value="<?php echo $i;?>" id="stored-info">
 										<?php _e( 'credit card last 4 numbers: ', 'woocommerce-paygent-main2' ) ?><?php echo substr($customer_check[$i]['card_number'],-4); ?> (<?php echo $customer_check[$i]['card_brand']; ?>)
-                                    <?php }?><?php endif;?>
+                                    <?php }?>
+								<?php endif;?>
 				                    </p>
 						</fieldset>
 						<fieldset>
@@ -169,6 +153,7 @@ class WC_Gateway_Paygent_MCCC extends WC_Payment_Gateway {
               			<fieldset>
               				<!-- Show input boxes for new data -->
               				<div id="paygent-new-info">
+              	<?php } ?>
               	<?php } ?>
 								<!-- Credit card number -->
                     			<p class="form-row form-row-first">

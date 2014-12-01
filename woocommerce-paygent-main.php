@@ -3,7 +3,7 @@
  * Plugin Name: WooCommerce For Paygent Main 3 method
  * Plugin URI: http://wordpress.org/plugins/woocommerce-paygent-main2/
  * Description: Woocommerce Main 3 gateway payment 
- * Version: 1.0.3
+ * Version: 1.0.4
  * Author: Artisan Workshop
  * Author URI: http://wc.artws.info/
  * Requires at least: 3.8
@@ -52,25 +52,31 @@ class WooCommercePaygentMain2{
 		define('PAYGENT_DEBUG_FLG', 0);//Debug Option
 		define('PAYGENT_SELCET_MAX_CNT', 2000);//Maximum query Count upto 2000
 		define('PAYGENT_TELEGRAM_KIND_REF', '027,090');//Telegram kind reffrence
-		define('URL01', 'https://mdev2.paygent.co.jp/n/atm/request');//ATM決済URL
-		define('URL02', 'https://mdev2.paygent.co.jp/n/card/request');//クレジットカード決済URL1
-		define('URL11', 'https://mdev2.paygent.co.jp/n/card/request');//クレジットカード決済URL2
-		define('URL18', 'https://mdev2.paygent.co.jp/n/card/request');//クレジットカード決済(多通貨)URL
-		define('URL19', 'https://mdev2.paygent.co.jp/n/card/request');//クレジットカード決済(端末読取)URL
-		define('URL03', 'https://mdev2.paygent.co.jp/n/conveni/request');//コンビニ番号方式決済URL
-		define('URL04', 'https://mdev2.paygent.co.jp/n/conveni/request_print');//コンビニ帳票方式決済URL
-		define('URL05', 'https://mdev2.paygent.co.jp/n/bank/request');//銀行ネット決済URL
-		define('URL06', 'https://mdev2.paygent.co.jp/n/bank/requestasp');//銀行ネット決済ASPURL
-		define('URL07', 'https://mdev2.paygent.co.jp/n/virtualaccount/request');//仮想口座決済URL
-		define('URL09', 'https://mdev2.paygent.co.jp/n/ref/request');//決済情報照会URL
-		define('URL091', 'https://mdev2.paygent.co.jp/n/ref/paynotice');//決済情報差分照会URL
-		define('URL093', 'https://mdev2.paygent.co.jp/n/ref/runnotice');//キャリア継続課金差分照会URL
-		define('URL094', 'https://mdev2.paygent.co.jp/n/ref/paymentref');//決済情報照会URL
-		define('URL10', 'https://mdev2.paygent.co.jp/n/c/request');//携帯キャリア決済URL
-		define('URL12', 'https://mdev2.paygent.co.jp/n/c/request');//携帯キャリア決済URL（継続課金用）
-		define('URL20', 'https://mdev2.paygent.co.jp/n/o/requestdata');//ファイル決済URL
-		define('URL15', 'https://mdev2.paygent.co.jp/n/emoney/request');//電子マネー決済URL
-		define('URL13', 'https://mdev2.paygent.co.jp/n/paypal/request');//PayPal決済URL
+		$paygent_testmode = get_option('wc-paygent-testmode');
+		if($paygent_testmode==1){
+			$paygent_url = 'https://mdev2.paygent.co.jp/';
+		}else{
+			$paygent_url = 'https://module.paygent.co.jp/';
+		}
+		define('URL01', $paygent_url.'n/atm/request');//ATM決済URL
+		define('URL02', $paygent_url.'n/card/request');//クレジットカード決済URL1
+		define('URL11', $paygent_url.'n/card/request');//クレジットカード決済URL2
+		define('URL18', $paygent_url.'n/card/request');//クレジットカード決済(多通貨)URL
+		define('URL19', $paygent_url.'n/card/request');//クレジットカード決済(端末読取)URL
+		define('URL03', $paygent_url.'n/conveni/request');//コンビニ番号方式決済URL
+		define('URL04', $paygent_url.'n/conveni/request_print');//コンビニ帳票方式決済URL
+		define('URL05', $paygent_url.'n/bank/request');//銀行ネット決済URL
+		define('URL06', $paygent_url.'n/bank/requestasp');//銀行ネット決済ASPURL
+		define('URL07', $paygent_url.'n/virtualaccount/request');//仮想口座決済URL
+		define('URL09', $paygent_url.'n/ref/request');//決済情報照会URL
+		define('URL091', $paygent_url.'n/ref/paynotice');//決済情報差分照会URL
+		define('URL093', $paygent_url.'n/ref/runnotice');//キャリア継続課金差分照会URL
+		define('URL094', $paygent_url.'n/ref/paymentref');//決済情報照会URL
+		define('URL10', $paygent_url.'n/c/request');//携帯キャリア決済URL
+		define('URL12', $paygent_url.'n/c/request');//携帯キャリア決済URL（継続課金用）
+		define('URL20', $paygent_url.'n/o/requestdata');//ファイル決済URL
+		define('URL15', $paygent_url.'n/emoney/request');//電子マネー決済URL
+		define('URL13', $paygent_url.'n/paypal/request');//PayPal決済URL
 		include_once('jp/co/ks/merchanttool/connectmodule/entity/ResponseDataFactory.php');
 		include_once('jp/co/ks/merchanttool/connectmodule/system/PaygentB2BModule.php');
 

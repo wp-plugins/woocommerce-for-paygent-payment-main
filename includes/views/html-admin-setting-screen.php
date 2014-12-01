@@ -54,24 +54,35 @@
 <table class="form-table">
 <tr valign="top">
     <th scope="row" class="titledesc">
-        <label for="woocommerce_input_yomigana"><?php echo __( 'Credit Card', 'woocommerce-paygent-main2' );?></label>
+        <label for="woocommerce_input_cc"><?php echo __( 'Credit Card', 'woocommerce-paygent-main2' );?></label>
     </th>
     <td class="forminp"><input type="checkbox" name="paygent_cc" value="1" <?php $options['wc-paygent-cc'] =get_option('wc-paygent-cc') ;checked( $options['wc-paygent-cc'], 1 ); ?>><?php echo __( 'Credit Card', 'woocommerce-paygent-main2' );?>
     <p class="description"><?php echo __( 'Please check it if you want to use the payment method of Credit Card', 'woocommerce-paygent-main2' );?></p></td>
 </tr>
 <tr valign="top">
     <th scope="row" class="titledesc">
-        <label for="woocommerce_input_company"><?php echo __( 'Convenience store', 'woocommerce-paygent-main2' );?></label>
+        <label for="woocommerce_input_cs"><?php echo __( 'Convenience store', 'woocommerce-paygent-main2' );?></label>
     </th>
     <td class="forminp"><input type="checkbox" name="paygent_cs" value="1" <?php $options['wc-paygent-cs'] =get_option('wc-paygent-cs') ;checked( $options['wc-paygent-cs'], 1 ); ?>><?php echo __( 'Convenience store', 'woocommerce-paygent-main2' );?>
     <p class="description"><?php echo __( 'Please check it if you want to use the payment method of Convenience store', 'woocommerce-paygent-main2' );?></p></td>
 </tr>
 <tr valign="top">
     <th scope="row" class="titledesc">
-        <label for="woocommerce_input_company"><?php echo __( 'Multi-currency Credit Card', 'woocommerce-paygent-main2' );?></label>
+        <label for="woocommerce_input_mccc"><?php echo __( 'Multi-currency Credit Card', 'woocommerce-paygent-main2' );?></label>
     </th>
     <td class="forminp"><input type="checkbox" name="paygent_mccc" value="1" <?php $options['wc-paygent-mccc'] =get_option('wc-paygent-mccc') ;checked( $options['wc-paygent-mccc'], 1 ); ?>><?php echo __( 'Multi-currency Credit Card', 'woocommerce-paygent-main2' );?>
     <p class="description"><?php echo __( 'Please check it if you want to use the payment method of Multi-currency Credit Card', 'woocommerce-paygent-main2' );?></p></td>
+</tr>
+</table>
+
+<h3><?php echo __( 'Test Mode', 'woocommerce-paygent-main2' );?></h3>
+<table class="form-table">
+<tr valign="top">
+    <th scope="row" class="titledesc">
+        <label for="woocommerce_input_testmode"><?php echo __( 'Test Mode', 'woocommerce-paygent-main2' );?></label>
+    </th>
+    <td class="forminp"><input type="checkbox" name="paygent_testmode" value="1" <?php $options['wc-paygent-testmode'] =get_option('wc-paygent-testmode') ;checked( $options['wc-paygent-testmode'], 1 ); ?>><?php echo __( 'Test Mode', 'woocommerce-paygent-main2' );?>
+    <p class="description"><?php echo __( 'Please check it if you want to use Testmode', 'woocommerce-paygent-main2' );?></p></td>
 </tr>
 </table>
 <p class="submit">

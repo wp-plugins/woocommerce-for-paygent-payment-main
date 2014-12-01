@@ -9,7 +9,7 @@ if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
  *
  * @class 			WC_Paygent
  * @extends		WC_Gateway_Paygent_CC
- * @version		1.0.0
+ * @version		1.0.4
  * @package		WooCommerce/Classes/Payment
  * @author			Artisan Workshop
  */
@@ -45,12 +45,7 @@ class WC_Gateway_Paygent_CC extends WC_Payment_Gateway {
 		foreach ( $this->settings as $key => $val ) $this->$key = $val;
 
 		// Load plugin checkout icon
-//		$this->icon = WP_CONTENT_DIR . '/plugins/woocommerce-paygent-main/images/paygent-cards.png';
 		$this->icon = plugins_url( 'images/paygent-cards.png' , __FILE__ );
-		// Logs
-		if ( 'yes' == $this->debug ) {
-			$this->log = new WC_Logger();
-		}
 
 		// Actions
 		add_action( 'woocommerce_receipt_paygent_cc',                              array( $this, 'receipt_page' ) );
@@ -97,25 +92,6 @@ class WC_Gateway_Paygent_CC extends WC_Payment_Gateway {
 				'label'       => __( 'Enable Store Card Infomation', 'woocommerce-paygent-main2' ),
 				'default'     => 'no',
 				'description' => sprintf( __( 'Store user Credit Card information in Paygent Server.(Option)', 'woocommerce-paygent-main2' )),
-			),
-			'testing' => array(
-				'title'       => __( 'Gateway Testing', 'woocommerce-paygent-main2' ),
-				'type'        => 'title',
-				'description' => '',
-			),
-			'testmode' => array(
-				'title'       => __( 'paygent Test mode', 'woocommerce-paygent-main2' ),
-				'type'        => 'checkbox',
-				'label'       => __( 'Enable paygent Test mode', 'woocommerce-paygent-main2' ),
-				'default'     => 'no',
-				'description' => sprintf( __( 'Please check you want to use paygent Test mode.', 'woocommerce-paygent-main2' )),
-			),
-			'debug' => array(
-				'title'       => __( 'Debug Log', 'woocommerce-paygent-main2' ),
-				'type'        => 'checkbox',
-				'label'       => __( 'Enable logging', 'woocommerce-paygent-main2' ),
-				'default'     => 'no',
-				'description' => sprintf( __( 'Log Paygent events, such as IPN requests, inside <code>woocommerce/logs/paygent-%s.txt</code>', 'woocommerce-paygent-main2' ), sanitize_file_name( wp_hash( 'paygent' ) ) ),
 			)
 		);
 		}
@@ -140,9 +116,10 @@ class WC_Gateway_Paygent_CC extends WC_Payment_Gateway {
       		<?php } ?>
 			<fieldset  style="padding-left: 40px;">
 		        <?php
+				if($this->store_card_info =='yes'){
 		          $user = wp_get_current_user();
 				  $customer_check = $this->user_has_stored_data( $user->ID );
-		          if ( $customer_check['result']==1 and $customer_check['responseCode']!="P026") { ?>
+				  if ( $customer_check['result']==1 and $customer_check['responseCode']!="P026") { ?>
 						<fieldset>
 							<input type="radio" name="paygent-use-stored-payment-info" id="paygent-use-stored-payment-info-yes" value="yes" checked="checked" onclick="document.getElementById('paygent-new-info').style.display='none'; document.getElementById('paygent-stored-info').style.display='block'"; /><label for="paygent-use-stored-payment-info-yes" style="display: inline;"><?php _e( 'Use a stored credit card from Paygent', 'woocommerce-paygent-main2' ) ?></label>
 								<div id="paygent-stored-info" style="padding: 10px 0 0 40px; clear: both;">
@@ -169,6 +146,7 @@ class WC_Gateway_Paygent_CC extends WC_Payment_Gateway {
               			<fieldset>
               				<!-- Show input boxes for new data -->
               				<div id="paygent-new-info">
+              	<?php } ?>
               	<?php } ?>
 								<!-- Credit card number -->
                     			<p class="form-row form-row-first">

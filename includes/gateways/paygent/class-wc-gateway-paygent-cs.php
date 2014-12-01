@@ -44,19 +44,12 @@ class WC_Gateway_Paygent_CS extends WC_Payment_Gateway {
 		// Get setting values
 		foreach ( $this->settings as $key => $val ) $this->$key = $val;
 
-		// Load plugin checkout icon
-//		$this->icon = WP_CONTENT_DIR . '/plugins/woocommerce-paygent-main/images/paygent-cards.png';
-//		$this->icon = plugins_url( 'images/paygent-cv.png' , __FILE__ );
-		// Logs
-		if ( 'yes' == $this->debug ) {
-			$this->log = new WC_Logger();
-		}
-
 		// Actions
 		add_action( 'woocommerce_receipt_paygent_cv',                              array( $this, 'receipt_page' ) );
 		add_action( 'woocommerce_update_options_payment_gateways',              array( $this, 'process_admin_options' ) );
 		add_action( 'woocommerce_update_options_payment_gateways_' . $this->id, array( $this, 'process_admin_options' ) );
-//		add_action( 'wp_enqueue_scripts',                                       array( $this, 'add_paygent_cv_scripts' ) );
+	    	// Customer Emails
+	    	add_action( 'woocommerce_email_before_order_table', array( $this, 'email_instructions' ), 10, 3 );
 	}
       /**
        * Initialize Gateway Settings Form Fields.
@@ -82,26 +75,7 @@ class WC_Gateway_Paygent_CS extends WC_Payment_Gateway {
 	        'type'        => 'textarea',
 	        'description' => __( 'This controls the description which the user sees during checkout.', 'woocommerce-paygent-main2' ),
 	        'default'     => __( 'Pay at Convenience Store via Paygent.', 'woocommerce-paygent-main2' )
-	        ),
-			'testing' => array(
-				'title'       => __( 'Gateway Testing', 'woocommerce-paygent-main2' ),
-				'type'        => 'title',
-				'description' => '',
-			),
-			'testmode' => array(
-				'title'       => __( 'paygent Test mode', 'woocommerce-paygent-main2' ),
-				'type'        => 'checkbox',
-				'label'       => __( 'Enable paygent Test mode', 'woocommerce-paygent-main2' ),
-				'default'     => 'no',
-				'description' => sprintf( __( 'Please check you want to use paygent Test mode.', 'woocommerce-paygent-main2' )),
-			),
-			'debug' => array(
-				'title'       => __( 'Debug Log', 'woocommerce-paygent-main2' ),
-				'type'        => 'checkbox',
-				'label'       => __( 'Enable logging', 'woocommerce-paygent-main2' ),
-				'default'     => 'no',
-				'description' => sprintf( __( 'Log Paygent events, such as IPN requests, inside <code>woocommerce/logs/paygent-%s.txt</code>', 'woocommerce-paygent-main2' ), sanitize_file_name( wp_hash( 'paygent' ) ) ),
-			)
+	        )
 		);
 		}
 
@@ -174,6 +148,7 @@ class WC_Gateway_Paygent_CS extends WC_Payment_Gateway {
 			"responseDetail"=> $order_process->getResponseDetail(),
 			"result_array"=> $res_array
 		);
+		$this->result_array = $response['result_array'];
 
       // Check response
       if ( $response['result'] == 0 ) {
@@ -228,6 +203,52 @@ class WC_Gateway_Paygent_CS extends WC_Payment_Gateway {
 			}
 			return null;
 		}
+    /**
+     * Add content to the WC emails For Convenient Infomation.
+     *
+     * @access public
+     * @param WC_Order $order
+     * @param bool $sent_to_admin
+     * @param bool $plain_text
+     * @return void
+     */
+    public function email_instructions( $order, $sent_to_admin, $plain_text = false ) {
+    	if ( ! $sent_to_admin && 'paygent_cs' === $order->payment_method && 'on-hold' === $order->status ) {
+			if ( $this->instructions ) {
+				echo wpautop( wptexturize( $this->instructions ) ) . PHP_EOL;
+			}
+			$this->paygent_cs_details( $order->id );
+		}
+    }
+
+    /**
+     * Get bank details and place into a list format
+     */
+    private function paygent_cs_details( $order_id = '' ) {
+		$cvs_array = array(
+			'00C001' => 'セブンイレブン',
+            '00C002' => 'ローソン',
+             '00C005' => 'ファミリーマート',
+            '00C016' => 'セイコーマート',
+            '00C004' => 'ミニストップ',
+            '00C006' => 'サンクス',
+            '00C007' => 'サークルK',
+            '00C014' => 'デイリーヤマザキ',
+		);
+		if(strstr($this->result_array['usable_cvs_company_id'], '-')){
+			$csv_companies = explode("-", $this->result_array['usable_cvs_company_id']);
+			foreach($csv_companies as $csv_company){
+				$usable_cvs_company .= $cvs_array[$csv_company].' ';
+			}
+		}else{
+			$usable_cvs_company = $cvs_array[$this->result_array['usable_cvs_company_id']];
+		}
+		$payment_limit_date = substr($this->result_array['payment_limit_date'], 0, 4).'/'.substr($this->result_array['payment_limit_date'], 5, 2).'/'.substr($this->result_array['payment_limit_date'], 7, 2);
+    	    	echo '<h3>' . __( 'Convenience store payment details', 'woocommerce-paygent-main2' ) . '</h3>' . PHP_EOL;
+		echo '<p>'. __( 'Receipt Number : ', 'woocommerce-paygent-main2' ) .$this->result_array['receipt_number'].'<br />'. __( 'URL : ', 'woocommerce-paygent-main2' ).$this->result_array['receipt_print_url'].'<br />'. __( 'Convenience store : ', 'woocommerce-paygent-main2' ).$usable_cvs_company.'<br />'. __( 'limit Date : ', 'woocommerce-paygent-main2') .$payment_limit_date.'</p>';
+
+    }
+
 }
 	/**
 	 * Add the gateway to woocommerce
@@ -239,3 +260,17 @@ class WC_Gateway_Paygent_CS extends WC_Payment_Gateway {
 
 	add_filter( 'woocommerce_payment_gateways', 'add_wc_paygent_cs_gateway' );
 
+	/**
+	 * Edit the available gateway to woocommerce
+	 */
+	function edit_available_gateways_cs( $methods ) {
+		if ( ! $currency ) {
+			$currency = get_woocommerce_currency();
+		}
+		if($currency !='JPY'){
+		unset($methods['paygent_cs']);
+		}
+		return $methods;
+	}
+
+	add_filter( 'woocommerce_available_payment_gateways', 'edit_available_gateways_cs' );
