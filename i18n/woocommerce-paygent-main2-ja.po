@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: WooCommerce For Paygent Main 2 method v1.0.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2014-12-02 06:33+0900\n"
+"PO-Revision-Date: 2014-12-05 06:58+0900\n"
 "Last-Translator: Shohei Tanaka <shohei.tanaka@artisanworkshop.biz>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -267,13 +267,13 @@ msgstr ""
 #: includes/gateways/paygent/class-wc-gateway-paygent-cc.php:148
 #: includes/gateways/paygent/class-wc-gateway-paygent-mccc.php:148
 msgid "Use a stored credit card from Paygent"
-msgstr "クレジットカード情報を保存する"
+msgstr "保存されているクレジットカード情報を使用する"
 
 # @ woocommerce-paygent-main2
 #: includes/gateways/paygent/class-wc-gateway-paygent-cc.php:153
 #: includes/gateways/paygent/class-wc-gateway-paygent-mccc.php:153
 msgid "credit card last 4 numbers: "
-msgstr "クレジットカードの最後の4桁"
+msgstr "クレジットカードの最後の4桁 : "
 
 # @ woocommerce-paygent-main2
 #: includes/gateways/paygent/class-wc-gateway-paygent-cc.php:160
