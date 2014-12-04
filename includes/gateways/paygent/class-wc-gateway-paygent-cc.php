@@ -9,7 +9,7 @@ if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
  *
  * @class 			WC_Paygent
  * @extends		WC_Gateway_Paygent_CC
- * @version		1.0.4
+ * @version		1.0.5
  * @package		WooCommerce/Classes/Payment
  * @author			Artisan Workshop
  */
@@ -92,7 +92,14 @@ class WC_Gateway_Paygent_CC extends WC_Payment_Gateway {
 				'label'       => __( 'Enable Store Card Infomation', 'woocommerce-paygent-main2' ),
 				'default'     => 'no',
 				'description' => sprintf( __( 'Store user Credit Card information in Paygent Server.(Option)', 'woocommerce-paygent-main2' )),
-			)
+			),
+//			'tds_check' => array(
+//				'title'       => __( '3D Secure Service', 'woocommerce-paygent-main2' ),
+//				'type'        => 'checkbox',
+//				'label'       => __( 'Enable Store 3DS service', 'woocommerce-paygent-main2' ),
+//				'default'     => 'no',
+//				'description' => sprintf( __( 'If you want to use 3DS service, please check it.', 'woocommerce-paygent-main2' )),
+//			)
 		);
 		}
 
@@ -116,28 +123,28 @@ class WC_Gateway_Paygent_CC extends WC_Payment_Gateway {
       		<?php } ?>
 			<fieldset  style="padding-left: 40px;">
 		        <?php
-				if($this->store_card_info =='yes'){
 		          $user = wp_get_current_user();
-				  $customer_check = $this->user_has_stored_data( $user->ID );
-				  if ( $customer_check['result']==1 and $customer_check['responseCode']!="P026") { ?>
+				  $card_user_id = 'wc'.$user->ID;
+				  $customer_check = $this->user_has_stored_data($card_user_id);
+				if($this->store_card_info =='yes' ){
+				  if (!$customer_check['result'] and $customer_check['responseCode']!='P026') { ?>
 						<fieldset>
-							<input type="radio" name="paygent-use-stored-payment-info" id="paygent-use-stored-payment-info-yes" value="yes" checked="checked" onclick="document.getElementById('paygent-new-info').style.display='none'; document.getElementById('paygent-stored-info').style.display='block'"; /><label for="paygent-use-stored-payment-info-yes" style="display: inline;"><?php _e( 'Use a stored credit card from Paygent', 'woocommerce-paygent-main2' ) ?></label>
+							<input type="radio" name="paygent-use-stored-payment-info" id="paygent-use-stored-payment-info-yes" value="yes" checked="checked" onclick="document.getElementById('paygent-new-info').style.display='none'; document.getElementById('paygent-stored-info').style.display='block'"; />
+                            <label for="paygent-use-stored-payment-info-yes" style="display: inline;"><?php _e( 'Use a stored credit card from Paygent', 'woocommerce-paygent-main2' ) ?></label>
 								<div id="paygent-stored-info" style="padding: 10px 0 0 40px; clear: both;">
-				                    <p><?php if($customer_check['result']==1):?>
+				                    <p><?php if(!$customer_check['result']):?>
                                     <?php $card_qty = count($customer_check['result_array'])-1; for($i=0; $i <= $card_qty; $i++) { ?>
-                                    		<input type="radio" name="stored-info-<?php echo $i;?>" value="<?php echo $i;?>" id="stored-info">
-										<?php _e( 'credit card last 4 numbers: ', 'woocommerce-paygent-main2' ) ?><?php echo substr($customer_check[$i]['card_number'],-4); ?> (<?php echo $customer_check[$i]['card_brand']; ?>)
+                                    		<input type="radio" name="stored-info" value="<?php echo $i;?>" id="stored-info">
+										<?php _e( 'credit card last 4 numbers: ', 'woocommerce-paygent-main2' ) ?><?php echo substr($customer_check['result_array'][$i]['card_number'],-4); ?> (<?php echo $customer_check['result_array'][$i]['card_brand']; ?>)<br />
                                     <?php }?><?php endif;?>
 				                    </p>
 						</fieldset>
 						<fieldset>
-							<p>
 								<input type="radio" name="paygent-use-stored-payment-info" id="paygent-use-stored-payment-info-no" value="no" onclick="document.getElementById('paygent-stored-info').style.display='none'; document.getElementById('paygent-new-info').style.display='block'"; />
 		                  		<label for="paygent-use-stored-payment-info-no"  style="display: inline;"><?php _e( 'Use a new payment method', 'woocommerce-paygent-main2' ) ?></label>
-		                	</p>
-		                	<div id="paygent-new-info" style="display:none">
 						</fieldset>
-				<?php } elseif($customer_check['responseCode'] and $customer_check['responseCode']!="P026") { ?>
+		                	<div id="paygent-new-info" style="display:none">
+				<?php } elseif($customer_check['responseCode'] and $customer_check['responseCode']!='P026') { ?>
               			<fieldset>
                         <div id="error"><?php echo __( 'Error! ', 'woocommerce-paygent-main2' ).$customer_check['responseCode'].":".mb_convert_encoding($customer_check['responseDetail'],"UTF-8","SJIS");?></div>
               				<!-- Show input boxes for new data -->
@@ -208,11 +215,12 @@ class WC_Gateway_Paygent_CC extends WC_Payment_Gateway {
 		function process_payment( $order_id ) {
 
 			global $woocommerce;
+			global $wpdb;
 
 			$order = new WC_Order( $order_id );
-			$user = new WP_User( $order->user_id );
+			$user = wp_get_current_user();
 			if($order->user_id){
-				$customer_id   = $order->user_id;
+				$customer_id   = $user->ID;
 			}else{
 				$customer_id   = $order->id.'-user';
 			}
@@ -230,31 +238,60 @@ class WC_Gateway_Paygent_CC extends WC_Payment_Gateway {
 		
 		$order_process->reqPut('payment_amount',$order->order_total);
 		
-      // Create server request using stored or new payment details
-		if ( $this->get_post( 'paygent-use-stored-payment-info' ) == 'yes' ) {
-			$order_process->reqPut('stock_card_mode',1);
-		} else {
-		//Credit Card Infomation
-			$order_process->reqPut('card_number',$this->get_post( 'card_number' ));
-			if($this->get_post( 'expire_m' ) < 10){
-				$expire_m = '0'.$this->get_post( 'expire_m' );
-			}else{
-				$expire_m = $this->get_post( 'expire_m' );
-			}
-			$card_valid_term = $expire_m.substr($this->get_post( 'expire_y' ),0,-2);
-			$order_process->reqPut('card_valid_term',$card_valid_term);
-        // Using Security Check
-        if ( $this->security_check == 'yes' ) {
-			$order_process->reqPut('card_conf_number',$this->get_post( 'security_code' ));
+		//Edit Expire Data
+		if($this->get_post( 'expire_m' ) < 10){
+			$expire_m = '0'.$this->get_post( 'expire_m' );
+		}else{
+			$expire_m = $this->get_post( 'expire_m' );
 		}
-      }
+		$card_valid_term = $expire_m.substr($this->get_post( 'expire_y' ),0,-2);
+
+      // Create server request using stored or new payment details
+	  $card_user_id = 'wc'.$order->user_id;
+		if ( $this->store_card_info == 'yes'){
+			if($this->get_post( 'paygent-use-stored-payment-info' )=='yes'){
+				$customer_check = $this->user_has_stored_data($card_user_id);
+				$order_process->reqPut('stock_card_mode',1);
+				$order_process->reqPut('customer_id',$card_user_id);
+				$order_process->reqPut('customer_card_id',$customer_check ['result_array'][$this->get_post( 'stored-info' )]['customer_card_id']);
+			}else{
+				$order_process->reqPut('stock_card_mode',1);
+				$order_process->reqPut('customer_id',$card_user_id);
+				$stored_user_card_data = $this->add_stored_user_data($card_user_id, $this->get_post( 'card_number' ), $card_valid_term);
+				if($stored_user_card_data['result']){
+					$order->add_order_note( __( 'Fault to stored your card info.', 'woocommerce-paygent-main2' ). $stored_user_card_data['responseCode'] .':'. mb_convert_encoding($stored_user_card_data['responseDetail'],"UTF-8","SJIS" ).':'.$order->user_id );
+        				$woocommerce->add_error( __( 'Fault to stored your card info.', 'woocommerce-paygent-main2' ) );
+				}else{
+				$order_process->reqPut('customer_card_id',$stored_user_card_data['customer_card_id']);
+				}
+			}
+		}else{
+			//Credit Card Infomation
+				$order_process->reqPut('card_number',$this->get_post( 'card_number' ));
+				$order_process->reqPut('card_valid_term',$card_valid_term);
+    	    		// Using Security Check
+    	    		if ( $this->security_check == 'yes' ) {
+				$order_process->reqPut('card_conf_number',$this->get_post( 'security_code' ));
+			}
+      	}
+
 	  //Payment times
 		$order_process->reqPut('payment_class',10);//One time payment
 		
 		//3D Secure Setting
+/*		if($this->tds_check=='no'){
 		$order_process->reqPut('3dsecure_ryaku',1);
-		$order_process->reqPut('http_access',$_SERVER['HTTP_ACCESS']);
+		}elseif($this->tds_check=='yes'){
+		$order_process->reqPut('3dsecure_use_type',1);
+		$order_process->reqPut('http_accept',$_SERVER['HTTP_ACCEPT']);
 		$order_process->reqPut('http_user_agent',$_SERVER['HTTP_USER_AGENT']);
+		$order_key = get_post_meta($order->id, '_order_key', true);
+		$current_url = (empty($_SERVER['HTTPS']) ? 'http://' : 'https://') . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
+		$term_url = $current_url.'/order-received/'.$order->id.'/?key='.$order_key;
+		$order_process->reqPut('term_url',$term_url);
+		}
+*/
+		$order_process->reqPut('3dsecure_ryaku',1);
 
 		$result = $order_process->post();
 		if($order_process->hasResNext()){
@@ -280,6 +317,31 @@ class WC_Gateway_Paygent_CC extends WC_Payment_Gateway {
         );
 
       } else if ( $response['result'] == 7 ) {//3DS
+	  if($response['result_array']['attempt_kbn']=1){
+			  //3Dセキュア未対応カードなどのエラー
+		        $order->add_order_note( __( 'Your card is not adapt 3D Secure ', 'woocommerce-paygent-main2' ). $response['responseCode'] .':'. mb_convert_encoding($response['responseDetail'],"UTF-8","SJIS" ) );
+        			$woocommerce->add_error( __( 'Your card is not adapt 3D Secure ', 'woocommerce-paygent-main2' ) );
+		}elseif($response['result_array']['attempt_kbn']=0){
+			  //3Dセキュア未加入カード
+			  $test_del = implode(",", $response['result_array']);
+		        $order->add_order_note( __( 'Your card is not Non-participation 3D Secure card.', 'woocommerce-paygent-main2' ). $response['responseCode'] .':'. $test_del .':'. mb_convert_encoding($response['responseDetail'],"UTF-8","SJIS" ) );
+        			$woocommerce->add_error( __( 'Your card is not Non-participation 3D Secure card.', 'woocommerce-paygent-main2' ) );
+		  }else{
+			// Mark as on-hold (we're awaiting the payment)
+			$order->update_status( 'on-hold', __( '3DSecure Payment Processing.', 'woocommerce-4jp' ) );
+
+			// Reduce stock levels
+			$order->reduce_order_stock();
+
+			// Remove cart
+			WC()->cart->empty_cart();
+
+			// Return thankyou redirect
+			return array(
+				'result' 	=> 'success',
+				'redirect'	=> $response['result_array']['out_acs_html']
+			);
+	  	}
 
       } else if ( $response['result'] == 1 ) {//System Error
         // Other transaction error
@@ -346,7 +408,7 @@ class WC_Gateway_Paygent_CC extends WC_Payment_Gateway {
     /**
      * Check if the user has any billing records in the Customer Vault
      */
-    function user_has_stored_data( $user_id ) {
+    function user_has_stored_data( $user_id, $customer_card_id=null ) {
 		$user_check = new PaygentB2BModule();
 		$user_check->init();
 		$user_check->reqPut('merchant_id',$this->merchant_id);
@@ -356,8 +418,8 @@ class WC_Gateway_Paygent_CC extends WC_Payment_Gateway {
 		$user_check->reqPut('telegram_kind','027');//Check Store User infomation
 		$user_check->reqPut('trading_id','');
 		$user_check->reqPut('customer_id',$user_id);
-		$user_check->reqPut('customer_card_id','');
-		if($this->site_id)$user_check->reqPut('site_id',$site_id);
+		$user_check->reqPut('customer_card_id',$customer_card_id);
+		if($this->site_id!=1)$user_check->reqPut('site_id',$this->site_id);
 
 		$result = $user_check->post();
 
@@ -384,7 +446,7 @@ class WC_Gateway_Paygent_CC extends WC_Payment_Gateway {
 		$user_stored->reqPut('telegram_kind','025');//Add Store User infomation
 		$user_stored->reqPut('telegram_version','1.0');
 		$user_stored->reqPut('trading_id','');
-		$user_stored->reqPut('custmer_id',$user_id);
+		$user_stored->reqPut('customer_id',$user_id);
 		$user_stored->reqPut('card_number',$card_number);
 		$user_stored->reqPut('card_valid_term',$card_valid_term);
 
@@ -393,7 +455,7 @@ class WC_Gateway_Paygent_CC extends WC_Payment_Gateway {
 			$res_array = $user_stored->resNext();
 		}
 		$data = array(
-			"result"=>$result,
+			"result"=>$user_stored->getResultStatus(),
 			"responseCode" => $user_stored->getResponseCode(),
 			"responseDetail" => $user_stored->getResponseDetail(),
 			"customer_card_id" => $res_array['customer_card_id']

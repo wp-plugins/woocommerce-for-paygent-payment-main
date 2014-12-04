@@ -9,7 +9,7 @@ if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
  *
  * @class 			WC_Paygent
  * @extends		WC_Gateway_Paygent_CS
- * @version		1.0.0
+ * @version		1.0.5
  * @package		WooCommerce/Classes/Payment
  * @author			Artisan Workshop
  */
@@ -153,8 +153,18 @@ class WC_Gateway_Paygent_CS extends WC_Payment_Gateway {
       // Check response
       if ( $response['result'] == 0 ) {
         // Success
-        $order->add_order_note( __( 'paygent Payment completed. Transaction ID: ' , 'woocommerce-paygent-main2' ) . 'wc_'.$order->id );
-        $order->payment_complete();
+        $order->add_order_note( __( 'Convenience store Payment completed. Transaction ID: ' , 'woocommerce-paygent-main2' ) . 'wc_'.$order->id . __('. Receipt Number : ', 'woocommerce-paygent-main2' ) .$this->result_array['receipt_number'] );
+
+		// Mark as on-hold (we're awaiting the payment)
+		$order->update_status( 'on-hold', __( 'Awaiting Convenience store payment', 'woocommerce-4jp' ) );
+
+		// Reduce stock levels
+		$order->reduce_order_stock();
+
+		// Remove cart
+		WC()->cart->empty_cart();
+
+//        $order->payment_complete();
 
         // Return thank you redirect
         return array (
