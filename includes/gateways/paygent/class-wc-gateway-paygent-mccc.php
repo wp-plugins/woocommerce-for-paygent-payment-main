@@ -235,6 +235,14 @@ class WC_Gateway_Paygent_MCCC extends WC_Payment_Gateway {
 		
 		$order_process->reqPut('payment_amount',$order->order_total);
 
+		//Edit Expire Data
+		if($this->get_post( 'expire_m' ) < 10){
+			$expire_m = '0'.$this->get_post( 'expire_m' );
+		}else{
+			$expire_m = $this->get_post( 'expire_m' );
+		}
+		$card_valid_term = $expire_m.substr($this->get_post( 'expire_y' ),-2);
+
 		//Get Currency infomation
 		if ( ! $currency ) {
 			$currency = get_woocommerce_currency();

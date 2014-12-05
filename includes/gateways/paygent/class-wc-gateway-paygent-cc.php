@@ -244,7 +244,7 @@ class WC_Gateway_Paygent_CC extends WC_Payment_Gateway {
 		}else{
 			$expire_m = $this->get_post( 'expire_m' );
 		}
-		$card_valid_term = $expire_m.substr($this->get_post( 'expire_y' ),0,-2);
+		$card_valid_term = $expire_m.substr($this->get_post( 'expire_y' ),-2);
 
       // Create server request using stored or new payment details
 	  $card_user_id = 'wc'.$order->user_id;
