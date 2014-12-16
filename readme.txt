@@ -3,8 +3,8 @@ Contributors: shohei.tanaka
 Donate link: http://wc.artws.info/
 Tags: credit cards, woocommerce, ecommerce, e-commerce, payment, payment Gateway, japan, payment
 Requires at least: 3.8
-Tested up to: 4.1
-Stable tag: 1.0.6
+Tested up to: 4.0.1
+Stable tag: 1.0.7
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -77,6 +77,8 @@ A: Here it is. <a href="http://support.artws.info/" target="_blank">Artisan Work
 2. Credit Input Form
 
 == Changelog ==
+= 1.0.7 =
+Bug Fix String encode Error
 = 1.0.6 =
 Bug Fix card_valid_term
 = 1.0.5 =

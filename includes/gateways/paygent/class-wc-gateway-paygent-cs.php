@@ -9,7 +9,7 @@ if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
  *
  * @class 			WC_Paygent
  * @extends		WC_Gateway_Paygent_CS
- * @version		1.0.5
+ * @version		1.0.7
  * @package		WooCommerce/Classes/Payment
  * @author			Artisan Workshop
  */
@@ -131,8 +131,8 @@ class WC_Gateway_Paygent_CS extends WC_Payment_Gateway {
 
 		$order_process->reqPut('payment_amount',$order->order_total);
 		// Customer Name
-		$order_process->reqPut('customer_family_name',$order->billing_last_name);
-		$order_process->reqPut('customer_name',$order->billing_first_name);
+		$order_process->reqPut('customer_family_name',mb_convert_encoding($order->billing_last_name, "SJIS", "UTF-8"));
+		$order_process->reqPut('customer_name',mb_convert_encoding($order->billing_first_name, "SJIS", "UTF-8"));
 		$order_process->reqPut('customer_tel',str_replace("-","",$order->billing_phone));
 
 		$order_process->reqPut('cvs_company_id',$this->get_post( 'cvs_company_id' ));// Convenience Store Company ID
