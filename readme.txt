@@ -1,10 +1,10 @@
 === WooCommerce for Paygent Payment Main===
-Contributors: shohei.tanaka
-Donate link: http://wc.artws.info/
+Contributors: artisan-workshop-1, shohei.tanaka
+Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_xclick&business=info@artws.info&item_name=Donation+for+Artisan&currency_code=JPY
 Tags: credit cards, woocommerce, ecommerce, e-commerce, payment, payment Gateway, japan, payment
 Requires at least: 3.8
-Tested up to: 4.0.1
-Stable tag: 1.0.7
+Tested up to: 4.1.0
+Stable tag: 1.0.8
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 

@@ -44,8 +44,26 @@ class WC_Gateway_Paygent_CC extends WC_Payment_Gateway {
 		// Get setting values
 		foreach ( $this->settings as $key => $val ) $this->$key = $val;
 
-		// Load plugin checkout icon
+		// Load plugin checkout credit Card icon
+		$this->cc_vm = get_option('wc-paygent-cc-vm');
+		$this->cc_d = get_option('wc-paygent-cc-d');
+		$this->cc_aj = get_option('wc-paygent-cc-aj');
+
+		if($this->cc_vm and $this->cc_d and $this->cc_aj){
 		$this->icon = plugins_url( 'images/paygent-cards.png' , __FILE__ );
+		}elseif($this->cc_vm and !$this->cc_d and !$this->cc_aj){
+		$this->icon = plugins_url( 'images/paygent-cards-v-m.png' , __FILE__ );
+		}elseif($this->cc_vm and $this->cc_d and !$this->cc_aj){
+		$this->icon = plugins_url( 'images/paygent-cards-v-m-d.png' , __FILE__ );
+		}elseif($this->cc_vm and !$this->cc_d and $this->cc_aj){
+		$this->icon = plugins_url( 'images/paygent-cards-v-m-a-j.png' , __FILE__ );
+		}elseif(!$this->cc_vm and !$this->cc_d and $this->cc_aj){
+		$this->icon = plugins_url( 'images/paygent-cards-a-j.png' , __FILE__ );
+		}elseif(!$this->cc_vm and $this->cc_d and !$this->cc_aj){
+		$this->icon = plugins_url( 'images/paygent-cards-d.png' , __FILE__ );
+		}elseif(!$this->cc_vm and $this->cc_d and $this->cc_aj){
+		$this->icon = plugins_url( 'images/paygent-cards-d-a-j.png' , __FILE__ );
+		}
 
 		// Actions
 		add_action( 'woocommerce_receipt_paygent_cc',                              array( $this, 'receipt_page' ) );

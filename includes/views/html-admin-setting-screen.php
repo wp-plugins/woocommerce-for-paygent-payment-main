@@ -75,6 +75,19 @@
 </tr>
 </table>
 
+<h3><?php echo __( 'Set Credit Card', 'woocommerce-paygent-main2' );?></h3>
+<table class="form-table">
+<tr valign="top">
+    <th scope="row" class="titledesc">
+        <label for="woocommerce_input_setcard"><?php echo __( 'Set able to Use Credit Card', 'woocommerce-paygent-main2' );?></label>
+    </th>
+    <td class="forminp"><input type="checkbox" name="paygent_cc_vm" value="1" <?php $options['wc-paygent-cc-vm'] =get_option('wc-paygent-cc-vm') ;checked( $options['wc-paygent-cc-vm'], 1 ); ?>><?php echo __( 'Visa & Master', 'woocommerce-paygent-main2' );?>
+    <input type="checkbox" name="paygent_cc_d" value="1" <?php $options['wc-paygent-cc-d'] =get_option('wc-paygent-cc-d') ;checked( $options['wc-paygent-cc-d'], 1 ); ?>><?php echo __( 'Dinners', 'woocommerce-paygent-main2' );?>
+    <input type="checkbox" name="paygent_cc_aj" value="1" <?php $options['wc-paygent-cc-aj'] =get_option('wc-paygent-cc-aj') ;checked( $options['wc-paygent-cc-aj'], 1 ); ?>><?php echo __( 'AMEX & JCB', 'woocommerce-paygent-main2' );?>
+    <p class="description"><?php echo __( 'Please check them you are able to use Credit Card', 'woocommerce-paygent-main2' );?></p></td>
+</tr>
+</table>
+
 <h3><?php echo __( 'Test Mode', 'woocommerce-paygent-main2' );?></h3>
 <table class="form-table">
 <tr valign="top">

@@ -255,7 +255,17 @@ class WC_Gateway_Paygent_CS extends WC_Payment_Gateway {
 		}
 		$payment_limit_date = substr($this->result_array['payment_limit_date'], 0, 4).'/'.substr($this->result_array['payment_limit_date'], 5, 2).'/'.substr($this->result_array['payment_limit_date'], 7, 2);
     	    	echo '<h3>' . __( 'Convenience store payment details', 'woocommerce-paygent-main2' ) . '</h3>' . PHP_EOL;
-		echo '<p>'. __( 'Receipt Number : ', 'woocommerce-paygent-main2' ) .$this->result_array['receipt_number'].'<br />'. __( 'URL : ', 'woocommerce-paygent-main2' ).$this->result_array['receipt_print_url'].'<br />'. __( 'Convenience store : ', 'woocommerce-paygent-main2' ).$usable_cvs_company.'<br />'. __( 'limit Date : ', 'woocommerce-paygent-main2') .$payment_limit_date.'</p>';
+		if($this->result_array['usable_cvs_company_id'] == '00C001'){
+		echo '<p>'. __( 'Receipt Number : ', 'woocommerce-paygent-main2' ) .$this->result_array['receipt_number'].'<br />'
+		. __( 'URL : ', 'woocommerce-paygent-main2' ).$this->result_array['receipt_print_url'].'<br />'
+		. __( 'Convenience store : ', 'woocommerce-paygent-main2' ).$usable_cvs_company.'<br />'
+		. __( 'limit Date : ', 'woocommerce-paygent-main2') .$payment_limit_date.'</p>';
+		}else{
+		echo '<p>'. __( 'Receipt Number : ', 'woocommerce-paygent-main2' ) .$this->result_array['receipt_number'].'<br />'
+		. __( 'Convenience store : ', 'woocommerce-paygent-main2' ).$usable_cvs_company.'<br />'
+		. __( 'limit Date : ', 'woocommerce-paygent-main2') .$payment_limit_date.'<br />'
+		. __( '* Receipt Number is Changed Name by Each Convenience store. Please check each.', 'woocommerce-paygent-main2') .'</p>';
+		}
 
     }
 
