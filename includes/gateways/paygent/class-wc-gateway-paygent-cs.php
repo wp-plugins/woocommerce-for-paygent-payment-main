@@ -299,7 +299,7 @@ class WC_Gateway_Paygent_CS extends WC_Payment_Gateway {
 		//Lowson & MiniStop Infomation
 		if(strstr($this->result_array['usable_cvs_company_id'], '00C002') or strstr($this->result_array['usable_cvs_company_id'], '00C004')){
 			echo '<div style="border:1px solid #737373;padding:0 15px;"><h4>'. __( 'For Lowson & MiniStop Users', 'woocommerce-paygent-main2' ).'</h4>'
-			.'<p>'. __( '商品購入時にECサイトより通知される「お客様番号（上記支払い番号）」と「確認番号(400008)」（または「お支払い受付番号」）をメモして、ローソン又はミニストップ店舗へ行きます。店内に設置されているマルチメディア端末Loppii又はMINISTOPLoppiに番号を入力し、発券される申込券でレジにてお支払いください。', 'woocommerce-paygent-main2' ).'</p></div>';
+			.'<p>'. __( '商品購入時にECサイトより通知される「お客様番号（上記支払い番号）」と「確認番号(400008)」（または「お支払い受付番号」）をメモして、ローソン又はミニストップ店舗へ行きます。店内に設置されているマルチメディア端末Loppii又はMINISTOPLoppiに番号を入力し、 発券される申込券でレジにてお支払いください。', 'woocommerce-paygent-main2' ).'</p></div>';
 		}
 		//Family Mart Infomation
 		if(strstr($this->result_array['usable_cvs_company_id'], '00C005')){
