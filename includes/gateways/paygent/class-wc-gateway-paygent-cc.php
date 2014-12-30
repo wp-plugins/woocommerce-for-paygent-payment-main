@@ -9,7 +9,7 @@ if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
  *
  * @class 			WC_Paygent
  * @extends		WC_Gateway_Paygent_CC
- * @version		1.0.5
+ * @version		1.0.9
  * @package		WooCommerce/Classes/Payment
  * @author			Artisan Workshop
  */
@@ -45,23 +45,19 @@ class WC_Gateway_Paygent_CC extends WC_Payment_Gateway {
 		foreach ( $this->settings as $key => $val ) $this->$key = $val;
 
 		// Load plugin checkout credit Card icon
-		$this->cc_vm = get_option('wc-paygent-cc-vm');
-		$this->cc_d = get_option('wc-paygent-cc-d');
-		$this->cc_aj = get_option('wc-paygent-cc-aj');
-
-		if($this->cc_vm and $this->cc_d and $this->cc_aj){
+		if($this->setting_card_vm =='yes' and $this->setting_card_d =='yes' and $this->setting_card_aj =='yes'){
 		$this->icon = plugins_url( 'images/paygent-cards.png' , __FILE__ );
-		}elseif($this->cc_vm and !$this->cc_d and !$this->cc_aj){
+		}elseif($this->setting_card_vm =='yes' and $this->setting_card_d =='no' and $this->setting_card_aj =='no'){
 		$this->icon = plugins_url( 'images/paygent-cards-v-m.png' , __FILE__ );
-		}elseif($this->cc_vm and $this->cc_d and !$this->cc_aj){
+		}elseif($this->setting_card_vm =='yes' and $this->setting_card_d =='yes' and $this->setting_card_aj =='no'){
 		$this->icon = plugins_url( 'images/paygent-cards-v-m-d.png' , __FILE__ );
-		}elseif($this->cc_vm and !$this->cc_d and $this->cc_aj){
+		}elseif($this->setting_card_vm =='yes' and $this->setting_card_d =='no' and $this->setting_card_aj =='yes'){
 		$this->icon = plugins_url( 'images/paygent-cards-v-m-a-j.png' , __FILE__ );
-		}elseif(!$this->cc_vm and !$this->cc_d and $this->cc_aj){
+		}elseif($this->setting_card_vm =='no' and $this->setting_card_d =='no' and $this->setting_card_aj =='yes'){
 		$this->icon = plugins_url( 'images/paygent-cards-a-j.png' , __FILE__ );
-		}elseif(!$this->cc_vm and $this->cc_d and !$this->cc_aj){
+		}elseif($this->setting_card_vm =='no' and $this->setting_card_d =='yes' and $this->setting_card_aj =='no'){
 		$this->icon = plugins_url( 'images/paygent-cards-d.png' , __FILE__ );
-		}elseif(!$this->cc_vm and $this->cc_d and $this->cc_aj){
+		}elseif($this->setting_card_vm =='no' and $this->setting_card_d =='yes' and $this->setting_card_aj =='yes'){
 		$this->icon = plugins_url( 'images/paygent-cards-d-a-j.png' , __FILE__ );
 		}
 
@@ -111,13 +107,26 @@ class WC_Gateway_Paygent_CC extends WC_Payment_Gateway {
 				'default'     => 'no',
 				'description' => sprintf( __( 'Store user Credit Card information in Paygent Server.(Option)', 'woocommerce-paygent-main2' )),
 			),
-//			'tds_check' => array(
-//				'title'       => __( '3D Secure Service', 'woocommerce-paygent-main2' ),
-//				'type'        => 'checkbox',
-//				'label'       => __( 'Enable Store 3DS service', 'woocommerce-paygent-main2' ),
-//				'default'     => 'no',
-//				'description' => sprintf( __( 'If you want to use 3DS service, please check it.', 'woocommerce-paygent-main2' )),
-//			)
+			'setting_card_vm' => array(
+				'title'       => __( 'Set Credit Card', 'woocommerce-paygent-main2' ),
+				'id'              => 'wc-paygent-cc-vm',
+				'type'        => 'checkbox',
+				'label'       => __( 'VISA & MASTER', 'woocommerce-paygent-main2' ),
+				'default'     => 'yes',
+			),
+			'setting_card_d' => array(
+				'id'              => 'wc-paygent-cc-d',
+				'type'        => 'checkbox',
+				'label'       => __( 'DINNERS', 'woocommerce-paygent-main2' ),
+				'default'     => 'yes',
+			),
+			'setting_card_aj' => array(
+				'id'              => 'wc-paygent-cc-aj',
+				'type'        => 'checkbox',
+				'label'       => __( 'AMEX & JCB', 'woocommerce-paygent-main2' ),
+				'default'     => 'yes',
+				'description' => sprintf( __( 'Please check them you are able to use Credit Card', 'woocommerce-paygent-main2' )),
+			),
 		);
 		}
 

@@ -177,22 +177,6 @@ class WC_Admin_Screen_Paygent {
 						update_option( 'woocommerce_paygent_mccc_settings', $woocommerce_paygent_mccc);
 					}
 				}
-				//Credit Card Setting
-				if(isset($_POST['paygent_cc_vm']) && $_POST['paygent_cc_vm']){//Visa & Master
-					update_option( 'wc-paygent-cc-vm', $_POST['paygent_cc_vm']);
-				}else{
-					update_option( 'wc-paygent-cc-vm', '');
-				}
-				if(isset($_POST['paygent_cc_d']) && $_POST['paygent_cc_d']){//Dinners
-					update_option( 'wc-paygent-cc-d', $_POST['paygent_cc_d']);
-				}else{
-					update_option( 'wc-paygent-cc-d', '');
-				}
-				if(isset($_POST['paygent_cc_aj']) && $_POST['paygent_cc_aj']){//AMEX & JCB
-					update_option( 'wc-paygent-cc-aj', $_POST['paygent_cc_aj']);
-				}else{
-					update_option( 'wc-paygent-cc-aj', '');
-				}
 				//Test Mode Setting
 				if(isset($_POST['paygent_testmode']) && $_POST['paygent_testmode']){
 					update_option( 'wc-paygent-testmode', $_POST['paygent_testmode']);

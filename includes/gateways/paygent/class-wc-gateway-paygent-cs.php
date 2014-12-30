@@ -9,7 +9,7 @@ if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
  *
  * @class 			WC_Paygent
  * @extends		WC_Gateway_Paygent_CS
- * @version		1.0.7
+ * @version		1.0.9
  * @package		WooCommerce/Classes/Payment
  * @author			Artisan Workshop
  */
@@ -44,6 +44,14 @@ class WC_Gateway_Paygent_CS extends WC_Payment_Gateway {
 		// Get setting values
 		foreach ( $this->settings as $key => $val ) $this->$key = $val;
 
+        // Set Convenience Store
+		$this->cs_stores = array();
+		if($this->setting_cs_se =='yes') $this->cs_stores = array_merge($this->cs_stores, array('00C001' => __( 'Seven Eleven', 'woocommerce-paygent-main2' )));
+		if($this->setting_cs_lm =='yes') $this->cs_stores = array_merge($this->cs_stores, array('00C002' => __( 'Lowson', 'woocommerce-paygent-main2' ), '00C004' => __( 'Mini Stop', 'woocommerce-paygent-main2' )));
+		if($this->setting_cs_f =='yes') $this->cs_stores = array_merge($this->cs_stores, array('00C005' => __( 'Family Mart', 'woocommerce-paygent-main2' )));
+		if($this->setting_cs_sm =='yes') $this->cs_stores = array_merge($this->cs_stores, array('00C016' => __( 'Seicomart', 'woocommerce-paygent-main2' )));
+		if($this->setting_cs_ctd =='yes') $this->cs_stores = array_merge($this->cs_stores, array('00C006' => __( 'Circle K', 'woocommerce-paygent-main2' ),'00C007' => __( 'Thanks', 'woocommerce-paygent-main2' ), '00C014' => __( 'Daily Yamazaki', 'woocommerce-paygent-main2' )));
+
 		// Actions
 		add_action( 'woocommerce_receipt_paygent_cv',                              array( $this, 'receipt_page' ) );
 		add_action( 'woocommerce_update_options_payment_gateways',              array( $this, 'process_admin_options' ) );
@@ -75,10 +83,49 @@ class WC_Gateway_Paygent_CS extends WC_Payment_Gateway {
 	        'type'        => 'textarea',
 	        'description' => __( 'This controls the description which the user sees during checkout.', 'woocommerce-paygent-main2' ),
 	        'default'     => __( 'Pay at Convenience Store via Paygent.', 'woocommerce-paygent-main2' )
-	        )
+	        ),
+			'setting_cs_se' => array(
+				'title'       => __( 'Set Convenience Store', 'woocommerce-paygent-main2' ),
+				'id'              => 'wc-paygent-cs-se',
+				'type'        => 'checkbox',
+				'label'       => __( 'Seven Eleven', 'woocommerce-paygent-main2' ),
+				'default'     => 'yes',
+			),
+			'setting_cs_lm' => array(
+				'id'              => 'wc-paygent-cs-lm',
+				'type'        => 'checkbox',
+				'label'       => __( 'Lowson & Mini Stop', 'woocommerce-paygent-main2' ),
+				'default'     => 'yes',
+			),
+			'setting_cs_f' => array(
+				'id'              => 'wc-paygent-cs-f',
+				'type'        => 'checkbox',
+				'label'       => __( 'Family Mart', 'woocommerce-paygent-main2' ),
+				'default'     => 'yes',
+			),
+			'setting_cs_sm' => array(
+				'id'              => 'wc-paygent-cs-sm',
+				'type'        => 'checkbox',
+				'label'       => __( 'Seicomart', 'woocommerce-paygent-main2' ),
+				'default'     => 'yes',
+			),
+			'setting_cs_ctd' => array(
+				'id'              => 'wc-paygent-cs-ctd',
+				'type'        => 'checkbox',
+				'label'       => __( 'Circle K & Thanks & Daily Yamazaki', 'woocommerce-paygent-main2' ),
+				'default'     => 'yes',
+				'description' => sprintf( __( 'Please check them you are able to use Convenience Store', 'woocommerce-paygent-main2' )),
+			),
 		);
 		}
 
+			function cs_select() {
+				?><select name="cvs_company_id">
+				<?php foreach($this->cs_stores as $num => $value){?>
+					<option value="<?php echo $num; ?>"><?php echo $value;?></option>
+				<?php }?>
+				</select><?php 
+				}
       /**
        * UI - Payment page fields for paygent Payment.
        */
@@ -89,16 +136,7 @@ class WC_Gateway_Paygent_CS extends WC_Payment_Gateway {
       		<?php } ?>
 			<fieldset  style="padding-left: 40px;">
             <p><?php _e( 'Please select Convenience Store where you want to pay', 'woocommerce-paygent-main2' );?></p>
-            <select name="cvs_company_id">
-            <option value="00C001">セブンイレブン</option>
-            <option value="00C002">ローソン</option>
-            <option value="00C005">ファミリーマート</option>
-            <option value="00C016">セイコーマート</option>
-            <option value="00C004">ミニストップ</option>
-            <option value="00C006">サンクス</option>
-            <option value="00C007">サークルK</option>
-            <option value="00C014">デイリーヤマザキ</option>
-            </select>
+            <?php $this->cs_select(); ?>
 			</fieldset>
 <?php
     }
@@ -153,7 +191,7 @@ class WC_Gateway_Paygent_CS extends WC_Payment_Gateway {
       // Check response
       if ( $response['result'] == 0 ) {
         // Success
-        $order->add_order_note( __( 'Convenience store Payment completed. Transaction ID: ' , 'woocommerce-paygent-main2' ) . 'wc_'.$order->id . __('. Receipt Number : ', 'woocommerce-paygent-main2' ) .$this->result_array['receipt_number'] );
+        $order->add_order_note( __( 'Convenience store Payment completed. Transaction ID: ' , 'woocommerce-paygent-main2' ) . 'wc_'.$order->id . __('. Receipt Number : ', 'woocommerce-paygent-main2' ) .$this->result_array['receipt_number'].__('. Enable CVS : ', 'woocommerce-paygent-main2' ) .$this->result_array['usable_cvs_company_id'] );
 
 		// Mark as on-hold (we're awaiting the payment)
 		$order->update_status( 'on-hold', __( 'Awaiting Convenience store payment', 'woocommerce-4jp' ) );
@@ -235,16 +273,7 @@ class WC_Gateway_Paygent_CS extends WC_Payment_Gateway {
      * Get bank details and place into a list format
      */
     private function paygent_cs_details( $order_id = '' ) {
-		$cvs_array = array(
-			'00C001' => 'セブンイレブン',
-            '00C002' => 'ローソン',
-             '00C005' => 'ファミリーマート',
-            '00C016' => 'セイコーマート',
-            '00C004' => 'ミニストップ',
-            '00C006' => 'サンクス',
-            '00C007' => 'サークルK',
-            '00C014' => 'デイリーヤマザキ',
-		);
+		$cvs_array = $this->cs_stores;
 		if(strstr($this->result_array['usable_cvs_company_id'], '-')){
 			$csv_companies = explode("-", $this->result_array['usable_cvs_company_id']);
 			foreach($csv_companies as $csv_company){
@@ -256,17 +285,41 @@ class WC_Gateway_Paygent_CS extends WC_Payment_Gateway {
 		$payment_limit_date = substr($this->result_array['payment_limit_date'], 0, 4).'/'.substr($this->result_array['payment_limit_date'], 5, 2).'/'.substr($this->result_array['payment_limit_date'], 7, 2);
     	    	echo '<h3>' . __( 'Convenience store payment details', 'woocommerce-paygent-main2' ) . '</h3>' . PHP_EOL;
 		if($this->result_array['usable_cvs_company_id'] == '00C001'){
-		echo '<p>'. __( 'Receipt Number : ', 'woocommerce-paygent-main2' ) .$this->result_array['receipt_number'].'<br />'
+		echo '<p>'. __( 'Payment slip number : ', 'woocommerce-paygent-main2' ) .$this->result_array['receipt_number'].'<br />'
 		. __( 'URL : ', 'woocommerce-paygent-main2' ).$this->result_array['receipt_print_url'].'<br />'
 		. __( 'Convenience store : ', 'woocommerce-paygent-main2' ).$usable_cvs_company.'<br />'
-		. __( 'limit Date : ', 'woocommerce-paygent-main2') .$payment_limit_date.'</p>';
+		. __( 'limit Date : ', 'woocommerce-paygent-main2') .$payment_limit_date.'<br />'
+		.'<div style="border:1px solid #737373;padding:0 15px;"><h4>'. __( 'For Seven Eleven Users', 'woocommerce-paygent-main2' ).'</h4>'
+		.'<p>'. __( '商品購入時に表示される払込票をプリントアウトし（もしくは「払込票番号」（13桁）をメモして）、セブンイレブン店舗へ行きます。店頭レジにて「インターネット代金の支払い」と伝え、払込票でお支払いいただくか、「払込票番号」を伝えお支払いください。', 'woocommerce-paygent-main2') .'</p></div>';
 		}else{
 		echo '<p>'. __( 'Receipt Number : ', 'woocommerce-paygent-main2' ) .$this->result_array['receipt_number'].'<br />'
 		. __( 'Convenience store : ', 'woocommerce-paygent-main2' ).$usable_cvs_company.'<br />'
-		. __( 'limit Date : ', 'woocommerce-paygent-main2') .$payment_limit_date.'<br />'
-		. __( '* Receipt Number is Changed Name by Each Convenience store. Please check each.', 'woocommerce-paygent-main2') .'</p>';
+		. __( 'limit Date : ', 'woocommerce-paygent-main2') .$payment_limit_date.'<br />';
 		}
-
+		//Lowson & MiniStop Infomation
+		if(strstr($this->result_array['usable_cvs_company_id'], '00C002') or strstr($this->result_array['usable_cvs_company_id'], '00C004')){
+			echo '<div style="border:1px solid #737373;padding:0 15px;"><h4>'. __( 'For Lowson & MiniStop Users', 'woocommerce-paygent-main2' ).'</h4>'
+			.'<p>'. __( '商品購入時にECサイトより通知される「お客様番号（上記支払い番号）」と「確認番号(400008)」（または「お支払い受付番号」）をメモして、ローソン又はミニストップ店舗へ行きます。店内に設置されているマルチメディア端末Loppii又はMINISTOPLoppiに番号を入力し、発券される申込券でレジにてお支払いください。', 'woocommerce-paygent-main2' ).'</p></div>';
+		}
+		//Family Mart Infomation
+		if(strstr($this->result_array['usable_cvs_company_id'], '00C005')){
+			echo '<div style="border:1px solid #737373;padding:0 15px;"><h4>'. __( 'For Family Mart Users', 'woocommerce-paygent-main2' ).'</h4>'
+			.'<p>'. __( '商品購入時にECサイトより通知される「収納番号（上記支払い番号）」（または「お客様番号」と「確認番号」）をメモして、ファミリーマート店舗へ行きます。店内に設置されているマルチメディア端末Famiportに番号を入力し、発券される申込券でレジにてお支払いください。', 'woocommerce-paygent-main2' ).'</p></div>';
+		}
+		//SeicoMart Infomation
+		if(strstr($this->result_array['usable_cvs_company_id'], '00C016') or strstr($this->result_array['usable_cvs_company_id'], '00C004')){
+			echo '<div style="border:1px solid #737373;padding:0 15px;"><h4>'. __( 'For Seicomart Users', 'woocommerce-paygent-main2' ).'</h4>'
+			.'<p>'. __( '品購入時にECサイトより通知される「お支払い受付番号（上記支払い番号）」をメモして、セイコーマート店舗へ行きます。店内に設置されているマルチメディア端末クラブステーションに番号を入力し、発券される申込券でレジにてお支払いください。', 'woocommerce-paygent-main2' ).'</p></div>';
+		}
+		//Circle K & Thanks & Daily Yamazaki Infomation
+		if(strstr($this->result_array['usable_cvs_company_id'], '00C06') or strstr($this->result_array['usable_cvs_company_id'], '00C007') or strstr($this->result_array['usable_cvs_company_id'], '00C014')){
+			echo '<div style="border:1px solid #737373;padding:0 15px;"><h4>'. __( 'For Circle K & Thanks & Daily Yamazaki Users', 'woocommerce-paygent-main2' ).'</h4>'
+			.'<p>'. __( '商品購入時にECサイトより通知される「オンライン決済番号/決済番号（上記支払い番号）」をメモして、各コンビニ店舗へ行きます。<br /><br />
+<b>・サークルK、サンクスでお支払いのお客様</b><br />
+店内に設置されているマルチメディア端末Kステーションに番号を入力し、発券される申込券でレジにてお支払いください。<br /><br />
+<b>・デイリーヤマザキでお支払いのお客様</b><br />
+店頭レジにて「オンライン決済」と伝え、レジのお客様用画面に「決済番号」を入力し、代金をお支払いください。', 'woocommerce-paygent-main2' ).'</p></div>';
+		}
     }
 
 }

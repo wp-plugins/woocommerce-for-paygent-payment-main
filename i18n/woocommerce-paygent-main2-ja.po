@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: WooCommerce For Paygent Main 2 method v1.0.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2014-12-29 15:54+0900\n"
+"PO-Revision-Date: 2014-12-30 11:53+0900\n"
 "Last-Translator: Shohei Tanaka <shohei.tanaka@artisanworkshop.biz>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -740,10 +740,112 @@ msgid "Convenience store : "
 msgstr "利用可能コンビニ : "
 
 # @ woocommerce-paygent-main2
-#: includes/gateways/paygent/class-wc-gateway-paygent-cs.php:267
-msgid ""
-"* Receipt Number is Changed Name by Each Convenience store. Please check "
-"each."
-msgstr ""
-"※コンビニによって支払い番号の呼び方や使い方が異なりますので、それぞれのコンビ"
-"ニ支払いでご確認下さい。"
+#: includes/gateways/paygent/class-wc-gateway-paygent-cs.php:288
+msgid "Payment slip number : "
+msgstr "払込票番号 : "
+
+# @ woocommerce-paygent-main2
+#: includes/gateways/paygent/class-wc-gateway-paygent-cs.php:301
+msgid "For Lowson & MiniStop Users"
+msgstr "ローソン及びミニストップでお支払いの方へ"
+
+# @ woocommerce-paygent-main2
+#: includes/gateways/paygent/class-wc-gateway-paygent-cs.php:292
+msgid "For Seven Eleven Users"
+msgstr "セブン-イレブンでお支払いの方へ"
+
+# @ woocommerce-paygent-main2
+#: includes/gateways/paygent/class-wc-gateway-paygent-cs.php:306
+msgid "For Family Mart Users"
+msgstr "ファミリーマートでお支払いの方へ"
+
+# @ woocommerce-paygent-main2
+#: includes/gateways/paygent/class-wc-gateway-paygent-cs.php:311
+msgid "For Seicomart Users"
+msgstr "セイコーマートでお支払いの方へ"
+
+# @ woocommerce-paygent-main2
+#: includes/gateways/paygent/class-wc-gateway-paygent-cs.php:288
+msgid "For Circle K & Thanks & Daily Yamazaki Users"
+msgstr "サークルKやサンクスやデイリーヤマザキでお支払いの方へ"
+
+# @ woocommerce-paygent-main2
+#: includes/gateways/paygent/class-wc-gateway-paygent-cs.php:88
+msgid "Set Convenience Store"
+msgstr "支払い可能コンビニ設定"
+
+# @ woocommerce-paygent-main2
+#: includes/gateways/paygent/class-wc-gateway-paygent-cs.php:91
+msgid "Seven Eleven"
+msgstr "セブン-イレブン"
+
+# @ woocommerce-paygent-main2
+#: includes/gateways/paygent/class-wc-gateway-paygent-cs.php:97
+msgid "Lowson"
+msgstr "ローソン"
+
+# @ woocommerce-paygent-main2
+#: includes/gateways/paygent/class-wc-gateway-paygent-cs.php:97
+msgid "Mini Stop"
+msgstr "ミニストップ"
+
+# @ woocommerce-paygent-main2
+#: includes/gateways/paygent/class-wc-gateway-paygent-cs.php:97
+msgid "Lowson & Mini Stop"
+msgstr "ローソンとミニストップ"
+
+# @ woocommerce-paygent-main2
+#: includes/gateways/paygent/class-wc-gateway-paygent-cs.php:103
+#: includes/gateways/paygent/class-wc-gateway-paygent-cs.php:51
+msgid "Family Mart"
+msgstr "ファミリーマート"
+
+# @ woocommerce-paygent-main2
+#: includes/gateways/paygent/class-wc-gateway-paygent-cs.php:109
+msgid "Seicomart"
+msgstr "セイコーマート"
+
+# @ woocommerce-paygent-main2
+#: includes/gateways/paygent/class-wc-gateway-paygent-cs.php:115
+msgid "Circle K & Thanks & Daily Yamazaki"
+msgstr "サークルKとサンクスとデイリーヤマザキ"
+
+# @ woocommerce-paygent-main2
+#: includes/gateways/paygent/class-wc-gateway-paygent-cs.php:53
+msgid "Circle K"
+msgstr "サークルK"
+
+# @ woocommerce-paygent-main2
+#: includes/gateways/paygent/class-wc-gateway-paygent-cs.php:53
+msgid "Thanks"
+msgstr "サンクス"
+
+# @ woocommerce-paygent-main2
+#: includes/gateways/paygent/class-wc-gateway-paygent-cs.php:53
+msgid "Daily Yamazaki"
+msgstr "デイリーヤマザキ"
+
+# @ woocommerce-paygent-main2
+#: includes/gateways/paygent/class-wc-gateway-paygent-cs.php:117
+msgid "Please check them you are able to use Convenience Store"
+msgstr "利用可能（審査の通った）なコンビニグループをチェックしてください。"
+
+# @ woocommerce-paygent-main2
+#: includes/gateways/paygent/class-wc-gateway-paygent-cc.php:111
+msgid "Set Credit Card"
+msgstr "利用可能クレジットカード設定"
+
+# @ woocommerce-paygent-main2
+#: includes/gateways/paygent/class-wc-gateway-paygent-cc.php:114
+msgid "VISA & MASTER"
+msgstr "VISA と MASTER"
+
+# @ woocommerce-paygent-main2
+#: includes/gateways/paygent/class-wc-gateway-paygent-cc.php:126
+msgid "AMEX & JCB"
+msgstr "AMEX と JCB"
+
+# @ woocommerce-paygent-main2
+#: includes/gateways/paygent/class-wc-gateway-paygent-cc.php:126
+msgid "Please check them you are able to use Credit Card"
+msgstr "利用可能（審査の通った）なクレジットカードをチェックして下さい。"
