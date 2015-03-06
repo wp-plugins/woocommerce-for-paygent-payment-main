@@ -9,7 +9,7 @@ if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
  *
  * @class 			WC_Paygent
  * @extends		WC_Gateway_Paygent_CS
- * @version		1.0.9
+ * @version		1.0.10
  * @package		WooCommerce/Classes/Payment
  * @author			Artisan Workshop
  */
@@ -215,11 +215,11 @@ class WC_Gateway_Paygent_CS extends WC_Payment_Gateway {
       } else if ( $response['result'] == 1 ) {//System Error
         // Other transaction error
         $order->add_order_note( __( 'paygent Payment failed. Sysmte Error: ', 'woocommerce-paygent-main2' ) . $response['responseCode'] .':'. mb_convert_encoding($response['responseDetail'],"UTF-8","SJIS" ).':'.'wc_'.$order->id );
-        $woocommerce->add_error( __( 'Sorry, there was an error: ', 'woocommerce-paygent-main2' ) . $response['responseCode'] );
+        wc_add_notice( __( 'Sorry, there was an error: ', 'woocommerce-paygent-main2' ) . $response['responseCode'] , $notice_type = 'error');
       } else {
         // No response or unexpected response
         $order->add_order_note( __( "paygent Payment failed. Some trouble happened.", 'woocommerce-paygent-main2' ). $response['result'] .':'.$response['responseCode'] .':'. mb_convert_encoding($response['responseDetail'],"UTF-8","SJIS").':'.'wc_'.$order->id );
-        $woocommerce->add_error( __( 'No response from payment gateway server. Try again later or contact the site administrator.', 'woocommerce-paygent-main2' ). $response['responseCode'] );
+        wc_add_notice(__( 'No response from payment gateway server. Try again later or contact the site administrator.', 'woocommerce-paygent-main2' ). $response['responseCode'] , $notice_type = 'error');
 
       }
 	}

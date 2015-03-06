@@ -3,8 +3,8 @@ Contributors: artisan-workshop-1, shohei.tanaka
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_xclick&business=info@artws.info&item_name=Donation+for+Artisan&currency_code=JPY
 Tags: credit cards, woocommerce, ecommerce, e-commerce, payment, payment Gateway, japan, payment
 Requires at least: 3.8
-Tested up to: 4.1.0
-Stable tag: 1.0.9
+Tested up to: 4.1.1
+Stable tag: 1.0.10
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -77,6 +77,8 @@ A: Here it is. <a href="http://support.artws.info/" target="_blank">Artisan Work
 2. Credit Input Form
 
 == Changelog ==
+= 1.0.10 =
+Bug Fix $woocommerce->add_error to wc_add_notice
 = 1.0.9 =
 Bug Fix and Add CVS information
 = 1.0.7 =

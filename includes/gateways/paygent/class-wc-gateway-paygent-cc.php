@@ -9,7 +9,7 @@ if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
  *
  * @class 			WC_Paygent
  * @extends		WC_Gateway_Paygent_CC
- * @version		1.0.9
+ * @version		1.0.10
  * @package		WooCommerce/Classes/Payment
  * @author			Artisan Workshop
  */
@@ -287,7 +287,7 @@ class WC_Gateway_Paygent_CC extends WC_Payment_Gateway {
 				$stored_user_card_data = $this->add_stored_user_data($card_user_id, $this->get_post( 'card_number' ), $card_valid_term);
 				if($stored_user_card_data['result']){
 					$order->add_order_note( __( 'Fault to stored your card info.', 'woocommerce-paygent-main2' ). $stored_user_card_data['responseCode'] .':'. mb_convert_encoding($stored_user_card_data['responseDetail'],"UTF-8","SJIS" ).':'.$order->user_id );
-        				$woocommerce->add_error( __( 'Fault to stored your card info.', 'woocommerce-paygent-main2' ) );
+        				wc_add_notice( __( 'Fault to stored your card info.', 'woocommerce-paygent-main2' ), $notice_type = 'error' );
 				}else{
 				$order_process->reqPut('customer_card_id',$stored_user_card_data['customer_card_id']);
 				}
@@ -347,12 +347,12 @@ class WC_Gateway_Paygent_CC extends WC_Payment_Gateway {
 	  if($response['result_array']['attempt_kbn']=1){
 			  //3Dセキュア未対応カードなどのエラー
 		        $order->add_order_note( __( 'Your card is not adapt 3D Secure ', 'woocommerce-paygent-main2' ). $response['responseCode'] .':'. mb_convert_encoding($response['responseDetail'],"UTF-8","SJIS" ) );
-        			$woocommerce->add_error( __( 'Your card is not adapt 3D Secure ', 'woocommerce-paygent-main2' ) );
+        			wc_add_notice( __( 'Your card is not adapt 3D Secure ', 'woocommerce-paygent-main2' ), $notice_type = 'error' );
 		}elseif($response['result_array']['attempt_kbn']=0){
 			  //3Dセキュア未加入カード
 			  $test_del = implode(",", $response['result_array']);
 		        $order->add_order_note( __( 'Your card is not Non-participation 3D Secure card.', 'woocommerce-paygent-main2' ). $response['responseCode'] .':'. $test_del .':'. mb_convert_encoding($response['responseDetail'],"UTF-8","SJIS" ) );
-        			$woocommerce->add_error( __( 'Your card is not Non-participation 3D Secure card.', 'woocommerce-paygent-main2' ) );
+        			wc_add_notice( __( 'Your card is not Non-participation 3D Secure card.', 'woocommerce-paygent-main2' ), $notice_type = 'error' );
 		  }else{
 			// Mark as on-hold (we're awaiting the payment)
 			$order->update_status( 'on-hold', __( '3DSecure Payment Processing.', 'woocommerce-4jp' ) );
@@ -373,11 +373,11 @@ class WC_Gateway_Paygent_CC extends WC_Payment_Gateway {
       } else if ( $response['result'] == 1 ) {//System Error
         // Other transaction error
         $order->add_order_note( __( 'paygent Payment failed. Sysmte Error: ', 'woocommerce-paygent-main2' ) . $response['responseCode'] .':'. mb_convert_encoding($response['responseDetail'],"UTF-8","SJIS" ).':'.'wc_'.$order->id );
-        $woocommerce->add_error( __( 'Sorry, there was an error: ', 'woocommerce-paygent-main2' ) . $response['responseCode'] );
+        wc_add_notice( __( 'Sorry, there was an error: ', 'woocommerce-paygent-main2' ) . $response['responseCode'], $notice_type = 'error' );
       } else {
         // No response or unexpected response
         $order->add_order_note( __( "paygent Payment failed. Some trouble happened.", 'woocommerce-paygent-main2' ). $response['result'] .':'.$response['responseCode'] .':'. mb_convert_encoding($response['responseDetail'],"UTF-8","SJIS").':'.'wc_'.$order->id );
-        $woocommerce->add_error( __( 'No response from payment gateway server. Try again later or contact the site administrator.', 'woocommerce-paygent-main2' ). $response['responseCode'] );
+        wc_add_notice( __( 'No response from payment gateway server. Try again later or contact the site administrator.', 'woocommerce-paygent-main2' ). $response['responseCode'], $notice_type = 'error' );
 
       }
 
@@ -500,7 +500,7 @@ class WC_Gateway_Paygent_CC extends WC_Payment_Gateway {
 
 			// Check for saving payment info without having or creating an account
 			if ( $this->get_post( 'saveinfo' )  && ! is_user_logged_in() && ! $this->get_post( 'createaccount' ) ) {
-        $woocommerce->add_error( __( 'Sorry, you need to create an account in order for us to save your payment information.', 'woocommerce-paygent-main2') );
+        wc_add_notice( __( 'Sorry, you need to create an account in order for us to save your payment information.', 'woocommerce-paygent-main2'), $notice_type = 'error' );
         return false;
       }
 
@@ -511,18 +511,18 @@ class WC_Gateway_Paygent_CC extends WC_Payment_Gateway {
 
 			// Check card number
 			if ( empty( $cardNumber ) || ! ctype_digit( $cardNumber ) ) {
-				$woocommerce->add_error( __( 'Card number is invalid.', 'woocommerce-paygent-main2' ) );
+				wc_add_notice( __( 'Card number is invalid.', 'woocommerce-paygent-main2' ), $notice_type = 'error' );
 				return false;
 			}
 
 			if ( $this->security_check == 'yes' ){
 				// Check security code
 				if ( ! ctype_digit( $cardCSC ) ) {
-					$woocommerce->add_error( __( 'Card security code is invalid (only digits are allowed).', 'woocommerce-paygent-main2' ) );
+					wc_add_notice( __( 'Card security code is invalid (only digits are allowed).', 'woocommerce-paygent-main2' ), $notice_type = 'error' );
 					return false;
 				}
 				if ( ( strlen( $cardCSC ) >4 ) ) {
-					$woocommerce->add_error( __( 'Card security code is invalid (wrong length).', 'woocommerce-paygent-main2' ) );
+					wc_add_notice( __( 'Card security code is invalid (wrong length).', 'woocommerce-paygent-main2' ), $notice_type = 'error' );
 					return false;
 				}
 			}
@@ -536,7 +536,7 @@ class WC_Gateway_Paygent_CC extends WC_Payment_Gateway {
 				 $cardExpirationYear < $currentYear ||
 				 $cardExpirationYear > $currentYear + 20
 			) {
-				$woocommerce->add_error( __( 'Card expiration date is invalid', 'woocommerce-paygent-main2' ) );
+				wc_add_notice( __( 'Card expiration date is invalid', 'woocommerce-paygent-main2' ), $notice_type = 'error' );
 				return false;
 			}
 
