@@ -3,11 +3,11 @@
  * Plugin Name: WooCommerce For Paygent Main 3 method
  * Plugin URI: http://wordpress.org/plugins/woocommerce-paygent-main2/
  * Description: Woocommerce Main 3 gateway payment 
- * Version: 1.0.10
+ * Version: 1.0.11
  * Author: Artisan Workshop
  * Author URI: http://wc.artws.info/
  * Requires at least: 3.8
- * Tested up to: 4.1.1
+ * Tested up to: 4.2.2
  *
  * Text Domain: woocommerce-paygent-main2
  * Domain Path: /i18n/

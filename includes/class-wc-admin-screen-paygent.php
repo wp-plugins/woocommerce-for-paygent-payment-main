@@ -71,7 +71,7 @@ class WC_Admin_Screen_Paygent {
 			echo '<div class="error"><ul><li>' . __('Paygent Cert File do not exist. Please put Cert files.', 'woocommerce-paygent-main2' ) .$cilent_msg.$ca_msg. '</li></ul></div>';
 		}
        // * Check if Client Cert file and CA Cert file uploaded files is fault.
-		if ($this->pem_error_message or $this->crt_error_message){
+		if (isset($this->pem_error_message) or isset($this->crt_error_message)){
 			if($this->pem_error_message) $cilent_msg = $this->pem_error_message;
 			if($this->crt_error_message) $ca_msg = $this->crt_error_message;
 			echo '<div class="error"><ul><li>' . __('Mistake your uploaded file.', 'woocommerce-paygent-main2' ) .$cilent_msg.$ca_msg. '</li></ul></div>';
@@ -82,9 +82,11 @@ class WC_Admin_Screen_Paygent {
        * Check if SSL is enabled and notify the user.
        */
       function paygent_ssl_check() {
-        if ( get_option( 'woocommerce_force_ssl_checkout' ) == 'no' && $this->enabled == 'yes' ) {
-            echo '<div class="error"><p>' . sprintf( __('Paygent Commerce is enabled and the <a href="%s">force SSL option</a> is disabled; your checkout is not secure! Please enable SSL and ensure your server has a valid SSL certificate.', 'woocommerce-paygent-main2' ), admin_url( 'admin.php?page=wc-settings&tab=checkout' ) ) . '</p></div>';
+		  if(isset($this->enabled)){
+              if ( get_option( 'woocommerce_force_ssl_checkout' ) == 'no' && $this->enabled == 'yes' ) {
+              echo '<div class="error"><p>' . sprintf( __('Paygent Commerce is enabled and the <a href="%s">force SSL option</a> is disabled; your checkout is not secure! Please enable SSL and ensure your server has a valid SSL certificate.', 'woocommerce-paygent-main2' ), admin_url( 'admin.php?page=wc-settings&tab=checkout' ) ) . '</p></div>';
             }
+		  }
 	  }
 
 	function wc_setting_paygent_init(){

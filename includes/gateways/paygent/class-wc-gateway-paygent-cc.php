@@ -447,6 +447,7 @@ class WC_Gateway_Paygent_CC extends WC_Payment_Gateway {
 		$user_check->reqPut('customer_id',$user_id);
 		$user_check->reqPut('customer_card_id',$customer_card_id);
 		if($this->site_id!=1)$user_check->reqPut('site_id',$this->site_id);
+		$res_array = array();
 
 		$result = $user_check->post();
 
@@ -617,9 +618,9 @@ class WC_Gateway_Paygent_CC extends WC_Payment_Gateway {
       if ( ! $this->user_has_stored_data( wp_get_current_user()->ID ) ) return;
 
       wp_enqueue_script( 'jquery' );
-      wp_enqueue_script( 'edit_billing_details', PLUGIN_DIR . 'js/edit_billing_details.js', array( 'jquery' ), 1.0 );
+      wp_enqueue_script( 'edit_billing_details', plugin_dir_path( __FILE__ ) . 'js/edit_billing_details.js', array( 'jquery' ), 1.0 );
 
-      if ( $this->security_check == 'yes' ) wp_enqueue_script( 'check_cvv', PLUGIN_DIR . 'js/check_cvv.js', array( 'jquery' ), 1.0 );
+      if ( $this->security_check == 'yes' ) wp_enqueue_script( 'check_cvv', plugin_dir_path( __FILE__ ) . 'js/check_cvv.js', array( 'jquery' ), 1.0 );
 
     }
 
@@ -655,7 +656,8 @@ class WC_Gateway_Paygent_CC extends WC_Payment_Gateway {
 	 * Edit the available gateway to woocommerce
 	 */
 	function edit_available_gateways( $methods ) {
-		if ( ! $currency ) {
+		if ( isset($currency) ) {
+		}else{
 			$currency = get_woocommerce_currency();
 		}
 		if($currency !='JPY'){

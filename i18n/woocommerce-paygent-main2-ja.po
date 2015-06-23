@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: WooCommerce For Paygent Main 2 method v1.0.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2014-12-30 11:53+0900\n"
+"PO-Revision-Date: 2015-06-23 14:36+0900\n"
 "Last-Translator: Shohei Tanaka <shohei.tanaka@artisanworkshop.biz>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -619,7 +619,7 @@ msgstr "クライアント認証書"
 # @ woocommerce-paygent-main2
 #: includes/views/html-admin-setting-screen.php:39
 msgid "Please select Client Cert File from local."
-msgstr "ローカルのパソコンからクライアント認証書を選択してください。"
+msgstr "ローカルのパソコンからクライアント認証書(.pem)を選択してください。"
 
 # @ woocommerce-paygent-main2
 #: includes/views/html-admin-setting-screen.php:39
@@ -638,7 +638,7 @@ msgstr "認証済みCAファイル"
 # @ woocommerce-paygent-main2
 #: includes/views/html-admin-setting-screen.php:46
 msgid "Please select CA Cert File from local."
-msgstr "ローカルのパソコンから認証済みCAファイルを選択してください。"
+msgstr "ローカルのパソコンから認証済みCAファイル(.crt)を選択してください。"
 
 # @ woocommerce-paygent-main2
 #: includes/views/html-admin-setting-screen.php:46
